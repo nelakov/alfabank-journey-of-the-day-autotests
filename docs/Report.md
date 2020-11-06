@@ -23,6 +23,8 @@ Cервис был протестирован с использованием с
 * успешных - 16 (61,53%)
 * неуспешных - 10 (38,47%)
 
+![proof](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/proof/allure.png)
+
 
 ### _Были протестированы сценарии, которые прописаны в плане тестирования:_
 [План автоматизации тестирования](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Plan.md)
