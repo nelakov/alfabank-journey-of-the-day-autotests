@@ -32,30 +32,40 @@
 
 2. Запустить контейнеры docker:  
 
-Для того, чтобы запустить с MySql, PostgreSQL и Node.js нужно использовать команду
-`docker-compose up -d --build`; 
-_чтобы образ не пересобирался каждый раз необходимо убрать флаг --build_
+   Для того, чтобы запустить с MySql, PostgreSQL и Node.js нужно использовать команду
+   `docker-compose up -d --build`; 
+   _чтобы образ не пересобирался каждый раз необходимо убрать флаг --build_
 
 3. Запустить приложение:  
 
-* для запуска под MySQL использовать команду 
-    ```
-    java -jar artifacts/aqa-shop.jar -P:jdbc.url=jdbc:mysql://localhost:3306/app -P:jdbc.user=app -P:jdbc.password=pass
-    ```
-    * для запуска под PostgreSQL использовать команду 
-    ```
-    java -jar artifacts/aqa-shop.jar -P:jdbc.url=jdbc:postgresql://localhost:5432/app -P:jdbc.user=app -P:jdbc.password=pass
+   -  Перед запуском под MySQL проверить url подключения в файле **application.properties**
+    `
+    spring.datasource.url=jdbc:mysql://localhost:3306/app
+    `
+    
+   -  для запуска под PostgreSQL проверить url подключения в файле **application.properties** 
+    `
+    spring.datasource.url=jdbc:postgresql://localhost:5432/app
+   `
+   
+   - Выполнить команду 
+  
+     `
+     java -jar artifacts/aqa-shop.jar
+     `
 
 4. Запустить тесты:  
 
    * для запуска тестов под базой данных MySQL 
-   ```
-   gradlew -Ddb.url=jdbc:mysql://localhost:3306/app clean test
-   ```
+    
+     `
+     gradlew -Ddb.url=jdbc:mysql://localhost:3306/app clean test
+     `
    * для запуска тестов под базой данных PostgreSQL 
-   ```
-   gradlew -Ddb.url=jdbc:postgresql://localhost:5432/app clean test
-   ```
+    
+     `
+     gradlew -Ddb.url=jdbc:postgresql://localhost:5432/app clean test
+     `
 
 5. Сформировать отчеты командой:  
    <code>gradlew allureReport</code>  
