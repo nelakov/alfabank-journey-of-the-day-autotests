@@ -43,8 +43,8 @@ out/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-!**/src/test/java/data**
-!**/artifacts/aqa-shop.jar**
+!src/test/java/data
+!artifacts/aqa-shop.jar
 
 
 .allure/
