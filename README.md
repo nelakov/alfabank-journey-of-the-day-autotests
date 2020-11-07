@@ -51,7 +51,7 @@
    - Выполнить команду 
   
      `
-     java -jar artifacts/aqa-shop.jar
+     java -jar ./artifacts/aqa-shop.jar
      `
 
 4. Запустить тесты:  
