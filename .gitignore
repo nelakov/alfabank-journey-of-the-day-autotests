@@ -32,7 +32,6 @@ out/
 
 ### Package Files ###
 *.jar
-!aqa-shop.jar
 *.war
 *.nar
 *.ear
@@ -45,6 +44,7 @@ out/
 !**/src/main/**
 !**/src/test/**
 !**/src/test/java/data**
+!**/artifacts/aqa-shop.jar**
 
 
 .allure/
