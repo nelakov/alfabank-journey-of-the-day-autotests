@@ -48,7 +48,6 @@ out/
 
 
 .allure/
-data/
 data_mysql/
 data_postgres/
 gate-simulator/node_modules
