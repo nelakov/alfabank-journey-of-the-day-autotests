@@ -1,4 +1,4 @@
-# _ Automation Plan_
+# _Automation Plan_
 
 ## _The list of automated test cases_
 
