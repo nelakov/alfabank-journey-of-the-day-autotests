@@ -1,131 +1,131 @@
-# _План автоматизации_
+# _ Automation Plan_
 
-## _Перечень автоматизируемых тест кейсов_
+## _The list of automated test cases_
 
-Под валидными данными при заполнении полей ввода следует считать:
+Valid data when filling in the input fields should be considered:
 
-1. Номер карты: 16 цифр в формате **** **** **** ****
-1. Месяц: 01-12, но не ранее текущего месяца в случае, если указан текущий год 
-1. Год: последние две цифры порядкового номера года, не ранее текущего года, не более 5ти лет от текущего года
-1. Владелец: буквенные символы латинского алфавита
-1. CVC: Цифры - 3 шт.  
-1. Тестовый набор данных - карты (файл data.json):
-* 4444 4444 4444 4441, status APPROVED
-* 4444 4444 4444 4442, status DECLINED
+1. Card number: 16 digits in the format **** **** **** ****
+1. Month: 01-12, but not earlier than the current month if the current year is specified 
+1. Year: the last two digits of the serial number of the year, not earlier than the current year, not more than 5 years from the current year
+1. Owner: alphabetic characters of the Latin alphabet
+1. CVC: Numbers - 3 pcs
+. 1. Test data set - maps (data.json file):
+* 4444 4444 4444 4441 , status APPROVED
+* 4444 4444 4444 4442 , status DECLINED
 
-Базы данных:
+Databases:
 * MySql
 * PostgreSQL 
 
-### _Тестовые сценарии_
+### _test scenarios_
 
-#### _Позитивные сценарии_
-1. Оплата по карте со статусом APPROVED  
-Номер карты 4444 4444 4444 4441, остальные поля заполнены корректными значениями  
-Ожидаемый результат: появилось всплывающее окно "Операция одобрена Банком", в БД в payment_entity появилась запись со статусом APPROVED 
+#### _Positive scenarios_
+1. Payment by card with the APPROVED status  
+The card number is 4444 4444 4444 4441, the other fields are filled with correct values  
+Expected result: a pop-up window "Operation approved by the Bank" appeared, an entry with the APPROVED status appeared in the payment_entity database 
 
-1. Кредит по данным карты со статусом APPROVED   
-Номер карты 4444 4444 4444 4441, остальные поля заполнены корректными значениями  
-Ожидаемый результат: появилось всплывающее окно "Операция одобрена Банком", в БД в credit_request_entity появилась запись со статусом APPROVED 
+1. Credit according to the card data with the APPROVED status   
+The card number is 4444 4444 4444 4441, the other fields are filled with correct values  
+Expected result: a pop-up window "Operation approved by the Bank" appeared, an entry with the APPROVED status appeared in the credit_request_entity database 
 
-1. Оплата по карте со статусом DECLINED    
-Номер карты 4444 4444 4444 4442, остальные поля заполнены корректными значениями   
-Ожидаемый результат: появилось всплывающее окно "Ошибка! Банк отказал в проведении операции", в БД в payment_entity появилась запись со статусом DECLINED 
+1. Payment by card with DECLINED status    
+The card number is 4444 4444 4444 4442, the other fields are filled with correct values   
+Expected result: a pop-up window "Error! The bank refused to perform the operation", an entry with the DECLINED status appeared in the payment_entity database 
 
-1. Кредит по данным карты со статусом DECLINED  
-Номер карты 4444 4444 4444 4442, остальные поля заполнены корректными значениями  
-Ожидаемый результат: появилось всплывающее окно "Ошибка! Банк отказал в проведении операции", в БД в credit_request_entity появилась запись со статусом DECLINED
+1. Credit according to the card data with the DECLINED status  
+The card number is 4444 4444 4444 4442, the other fields are filled with correct values  
+Expected result: a pop-up window "Error! The bank refused to carry out the operation", an entry with the DECLINED status appeared in the credit_request_entity database
 
-#### _Негативные сценарии_
-1. Оплата по несуществующей карте   
-Номер карты 4444 4444 4444 4443, остальные поля заполнены корректными значениями  
-Ожидаемый результат: появилось всплывающее окно "Ошибка! Банк отказал в проведении операции", в БД в payment_entity новая запись не появилась 
+#### _negative scenarios_
+1. Payment using a non-existent card   
+The card number is 4444 4444 4444 4443, the other fields are filled with correct values  
+Expected result: a pop-up window "Error! The bank refused to carry out the operation", no new entry appeared in the DB in payment_entity 
 
-1. Кредит по данным несуществующей карты   
-Номер карты 4444 4444 4444 4443, остальные поля заполнены корректными значениями  
-Ожидаемый результат: появилось всплывающее окно "Ошибка! Банк отказал в проведении операции", в БД в credit_request_entity новая запись не появилась
+1. Credit according to non-existent card data   
+The card number is 4444 4444 4444 4443, the other fields are filled with correct values  
+Expected result: a pop-up window "Error! The bank refused to carry out the operation", no new entry appeared in the credit_request_entity database
 
-1. Оплата по карте, указан невалидный номер   
-Номер карты 4444 4444 4444 444, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Номер карты появилось сообщение об ошибке "Неверный формат", в БД в payment_entity новая запись не появилась 
+1. Payment by card, invalid number is specified   
+The card number is 4444 4444 4444 444, the other fields are filled with correct values  
+Expected result: an error message "Incorrect format" appeared under the Card Number field, no new entry appeared in the payment_entity database 
 
-1. Кредит по данным карты, указан невалидный номер    
-Номер карты 4444 4444 4444 444, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Номер карты появилось сообщение об ошибке "Неверный формат", в БД в credit_request_entity новая запись не появилась
+1. Credit according to the card data, invalid number is indicated    
+The card number is 4444 4444 4444 444, the other fields are filled with correct values  
+Expected result: an error message "Incorrect format" appeared under the Card Number field, no new entry appeared in the credit_request_entity database
 
-1. Оплата по карте с истекшим сроком действия (месяц)  
-Номер карты 4444 4444 4444 4441, указать предыдущий месяц, текущий год, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Месяц появилось сообщение об ошибке "Неверно указан срок действия карты", в БД в payment_entity новая запись не появилась 
+1. Payment by expired card (month)  
+Card number 4444 4444 4444 4441, specify the previous month, the current year, the remaining fields are filled with correct values  
+Expected result: an error message appeared under the Month field "The card expiration date is incorrect", a new entry did not appear in the payment_entity database 
 
-1. Кредит по данным карты с истекшим сроком действия (месяц)  
-Номер карты 4444 4444 4444 4441, указать предыдущий месяц, текущий год, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Месяц появилось сообщение об ошибке "Неверно указан срок действия карты", в БД в credit_request_entity новая запись не появилась
+1. Credit according to expired card data (month)  
+Card number 4444 4444 4444 4441, specify the previous month, the current year, the remaining fields are filled with correct values  
+Expected result: an error message appeared under the Month field "The card expiration date is incorrect", a new entry did not appear in the credit_request_entity database
 
-1. Оплата по данным карты, указан невалидный месяц   
-Номер карты 4444 4444 4444 4441, в поле Месяц указать 00, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Месяц появилось сообщение об ошибке "Неверно указан срок действия карты", в БД в payment_entity новая запись не появилась 
+1. Payment according to the card data, the invalid month is specified   
+The card number is 4444 4444 4444 4441, enter 00 in the Month field, the other fields are filled with correct values  
+Expected result: an error message appeared under the Month field "The card expiration date is incorrect", a new entry did not appear in the payment_entity database 
 
-1. Кредит по данным карты, указан невалидный месяц   
-Номер карты 4444 4444 4444 4441, в поле Месяц указать 00, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Месяц появилось сообщение об ошибке "Неверно указан срок действия карты", в БД в credit_request_entity новая запись не появилась
+1. Credit according to the card data, invalid month is specified   
+The card number is 4444 4444 4444 4441, enter 00 in the Month field, the other fields are filled with correct values  
+Expected result: an error message appeared under the Month field "The card expiration date is incorrect", a new entry did not appear in the credit_request_entity database
 
-1. Оплата по карте с истекшим сроком действия (год)  
-Номер карты 4444 4444 4444 4441, указать предыдущий год, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Год появилось сообщение об ошибке "Истёк срок действия карты", в БД в payment_entity новая запись не появилась 
+1. Payment by expired card (year)  
+Card number 4444 4444 4444 4441, specify the previous year, the remaining fields are filled with correct values  
+Expected result: an error message "Card expired" appeared under the Year field, no new entry appeared in the payment_entity database 
 
-1. Кредит по данным карты с истекшим сроком действия (год)  
-Номер карты 4444 4444 4444 4441, указать предыдущий год, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Год появилось сообщение об ошибке "Истёк срок действия карты", в БД в credit_request_entity новая запись не появилась
+1. Credit according to expired card data (year)  
+Card number 4444 4444 4444 4441, specify the previous year, the remaining fields are filled with correct values  
+Expected result: an error message "Card expired" appeared under the Year field, no new entry appeared in the credit_request_entity database
 
-1. Оплата по данным карты, указан невалидный год   
-Номер карты 4444 4444 4444 4441, в поле Год указать "последние две цифры текущего года + 6", остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Год появилось сообщение об ошибке "Неверно указан срок действия карты", в БД в payment_entity новая запись не появилась 
+1. Payment according to the card data, the invalid year is specified   
+The card number is 4444 4444 4444 4441, in the Year field specify "the last two digits of the current year + 6", the remaining fields are filled with correct values  
+Expected result: an error message appeared under the Year field "The card expiration date is incorrect", a new entry did not appear in the payment_entity database 
 
-1. Кредит по данным карты, указан невалидный год   
-Номер карты 4444 4444 4444 4441, в поле Год указать "последние две цифры текущего года + 6", остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Год появилось сообщение об ошибке "Неверно указан срок действия карты", в БД в credit_request_entity новая запись не появилась
+1. Credit according to the card data, the invalid year is indicated   
+The card number is 4444 4444 4444 4441, in the Year field specify "the last two digits of the current year + 6", the remaining fields are filled with correct values  
+Expected result: an error message appeared under the Year field "The card expiration date is incorrect", a new entry did not appear in the credit_request_entity database
 
-1. Оплата по данным карты, указано некорректное значение в поле Владелец  
-Номер карты 4444 4444 4444 4441, в поле Владелец указать некорректные данные, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Владелец появилось сообщение об ошибке, в БД в payment_entity новая запись не появилась 
+1. Payment according to the card data, an incorrect value is specified in the Owner field  
+The card number is 4444 4444 4444 4441, incorrect data should be specified in the Owner field, the remaining fields are filled with correct values  
+Expected result: an error message appeared under the Owner field, no new entry appeared in the DB in payment_entity 
 
-1. Кредит по данным карты, указано некорректное значение в поле Владелец   
-Номер карты 4444 4444 4444 4441, в поле Владелец указать некорректные данные, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем Владелец появилось сообщение об ошибке, в БД в credit_request_entity новая запись не появилась
+1. Credit according to the card data, an incorrect value is specified in the Owner field   
+The card number is 4444 4444 4444 4441, incorrect data should be specified in the Owner field, the remaining fields are filled with correct values  
+Expected result: an error message appeared under the Owner field, no new entry appeared in the credit_request_entity database
 
-1. Оплата по данным карты, указано некорректное значение в поле CVC/CVV   
-Номер карты 4444 4444 4444 4441, в поле CVC/CVV указать 0, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем CVC/CVV появилось сообщение об ошибке "Неверный формат", в БД в payment_entity новая запись не появилась 
+1. Payment according to the card data, an incorrect value is specified in the CVC/CVV field   
+The card number is 4444 4444 4444 4441, specify 0 in the CVC/CVV field, the other fields are filled with correct values  
+Expected result: an error message "Invalid format" appeared under the CVC/CVV field, no new entry appeared in the payment_entity database 
 
-1. Кредит по данным карты, указано некорректное значение в поле CVC/CVV   
-Номер карты 4444 4444 4444 4441, в поле CVC/CVV указать 0, остальные поля заполнены корректными значениями  
-Ожидаемый результат: под полем CVC/CVV появилось сообщение об ошибке "Неверный формат", в БД в credit_request_entity новая запись не появилась
+1. Credit according to the card data, an incorrect value is specified in the CVC/CVV field   
+The card number is 4444 4444 4444 4441, specify 0 in the CVC/CVV field, the other fields are filled with correct values  
+Expected result: an error message "Invalid format" appeared under the CVC/CVV field, no new entry appeared in the credit_request_entity database
 
-## _Перечень используемых инструментов с обоснованием выбора_
+## _The list of tools used with the justification of the choice_
 
-* Java 8 - язык написания авто-тестов, наиболее надежная версия
-* Gradle - система автоматизации сборки и управления зависимостями
-* JUnit — платформа для написания авто-тестов и их запуска 
-* Selenide - фреймворк для автоматизированного тестирования веб-приложений на основе Selenium WebDriver, более удобный и простой в использовании, чем Selenium
-* Docker Compose - инструмент, позволяющий запускать мультиконтейнерные приложения, чтобы не устанавливать на компьютер необходимые для работы приложения Node.js и СУБД 
-* Allure - фреймворк, предназначенный для создания отчетов, более наглядных, чем у Gradle
+* Java 8 - the language for writing auto-tests, the most reliable version
+* Gradle - build automation and dependency management system
+* JUnit is a platform for writing auto—tests and running them 
+* Selenide is a framework for automated testing of web applications based on Selenium WebDriver, more convenient and easy to use than Selenium
+* Docker Compose is a tool that allows you to run multi-container applications, so as not to install Node applications necessary for operation on your computer.js and DBMS
+* Allure is a framework designed to create reports that are more visual than Gradle
 
-## _Перечень и описание возможных рисков при автоматизации_
-* Из-за отсутствия ТЗ и какой-либо документации сложно понять, как должно работать приложение и какое поведение системы нужно считать ошибкой
-* Реальная система и реальные данные скорее всего будут отличаться от SUT и тестовых данных, и автоматизация тестирования может оказаться бесполезной
-* Использование сторонних библиотек и фреймворков может увеличивать риск возникновения технических проблем
-* Возможны проблемы из-за необходимости поддержки двух СУБД (MySQL, Postgres)
-* Отсутствие test_id усложняет написание и поддержку тестов
+## _The list and description of possible risks in automation_
+* Due to the lack of technical specifications and any documentation, it is difficult to understand how the application should work and what system behavior should be considered an error
+* The real system and real data are likely to be different from the SUT and test data, and test automation may be useless
+* Using third-party libraries and frameworks may increase the risk of technical problems
+* Possible problems due to the need to support two DBMS (MySQL, Postgres)
+* The absence of test_id complicates the writing and support of tests
 
-## _Интервальная оценка с учетом рисков (в часах)_
-Настройка тестового окружения - 8  
-Написание и отладка автотестов - 30  
-Прогон тестов и заведение issue - 8  
-Устранение замечаний - 6  
-Подготовка отчета по итогам автоматизированного тестирования - 8  
-Подготовка отчета по итогам автоматизации - 8  
-**Итого с учетом рисков: ~70 часов**
+## _interval assessment taking into account risks (in hours)_
+Setting up the test environment - 8  
+Writing and debugging autotests - 30  
+Test run and issue - 8 institution  
+Elimination of comments - 6  
+Preparation of a report on the results of automated testing - 8  
+Preparation of a report on the results of automation - 8  
+**Total, taking into account risks: ~70 hours**
 
-## _План сдачи работ_
-Автоматизация - 28.10.2020  
-Подготовка отчетных документов - 31.10.2020  
+## _Plan of delivery of works_
+Automation - 28.10.2020  
+Preparation of accounting documents - 31.10.2020
