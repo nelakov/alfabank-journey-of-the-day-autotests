@@ -1,12 +1,12 @@
-# _Отчет по итогам тестирования_
+# _The report on the results of testing_
 
-### _Краткое описание_
+### _ Brief description_
 
-Был протестирован веб-сервис "Путешествие дня", который представляет из себя комплексный сервис, взаимодействующий с СУБД и API Банка.
+The web service "Journey of the Day" was tested, which is a comprehensive service that interacts with the DBMS and the API of the Bank.
 
-Тестирование проведено для двух БД - MySQL и PostgreSQL.
+Testing was carried out for two databases - MySQL and PostgreSQL.
 
-Cервис был протестирован с использованием следующих инструментов:
+The service has been tested using the following tools:
 
 * Docker Desktop
 * Java 8
@@ -14,39 +14,39 @@ Cервис был протестирован с использованием с
 * selenide: 5.11.0
 * allure 2.13.6
 * Lombok 5.2.1
-* MySql и PostgreSQL
+* MySQL and PostgreSQL
 
-### _Количество тест-кейсов_
+### _ Number of test cases_
 
-Общее количество тест-кейсов - 26 (4 позитивных, 22 негативных)
+The total number of test cases is 26 (4 positive, 22 negative)
 
-* успешных - 16 (61,53%)
-* неуспешных - 10 (38,47%)
+* successful - 16 (61.53%)
+* unsuccessful - 10 (38.47%)
 
 ![proof](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/proof/allure.png)
 
 
-### _Были протестированы сценарии, которые прописаны в плане тестирования:_
-[План автоматизации тестирования](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Plan.md)
+### _The scenarios that are prescribed in the test plan have been tested:_
+[Test Automation Plan](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Plan.md )
 
-#### _Найденные баги_
-* [Орфографическая ошибка в названии тура](https://github.com/elakovnick24/Elakov_Nick_Project/issues/1)
-* [При оплате невалидной картой одновременно появляются сообщения об ошибке и успехе](https://github.com/elakovnick24/Elakov_Nick_Project/issues/2)
-* [В БД не создаётся credit_id в таблице order_entity](https://github.com/elakovnick24/Elakov_Nick_Project/issues/3)
-* [В поле "Владелец" можно ввести некорректные символы](https://github.com/elakovnick24/Elakov_Nick_Project/issues/4)
-* [В поле "Владелец" можно ввести символы на кириллице](https://github.com/elakovnick24/Elakov_Nick_Project/issues/5)
-* [Если поле cvs/cvv не заполнено предупреждение появляется под полем Владелец](https://github.com/elakovnick24/Elakov_Nick_Project/issues/6)
-* [Неверная запись статуса в БД и неверный поп-ап со статусом транзакции](https://github.com/elakovnick24/Elakov_Nick_Project/issues/7)
-* [Неверная запись статуса транзакции в БД](https://github.com/elakovnick24/Elakov_Nick_Project/issues/8)
-* [Отсутствует поп-ап "Введены некорректные данные"](https://github.com/elakovnick24/Elakov_Nick_Project/issues/9)
-* [Отсутствует сообщение об ошибке при вводе некорректных данных](https://github.com/elakovnick24/Elakov_Nick_Project/issues/10)
+#### _ Found bugs_
+* [Spelling error in the name of the tour](https://github.com/elakovnick24/Elakov_Nick_Project/issues/1 )
+* [When paying with an invalid card, error and success messages appear simultaneously](https://github.com/elakovnick24/Elakov_Nick_Project/issues/2 )
+* [credit_id is not created in the DB in the order_entity table](https://github.com/elakovnick24/Elakov_Nick_Project/issues/3 )
+* [Incorrect characters can be entered in the "Owner" field](https://github.com/elakovnick24/Elakov_Nick_Project/issues/4 )
+* [You can enter Cyrillic characters in the "Owner" field](https://github.com/elakovnick24/Elakov_Nick_Project/issues/5 )
+* [If the cvs/cvv field is not filled in, a warning appears under the Owner field](https://github.com/elakovnick24/Elakov_Nick_Project/issues/6 )
+* [Incorrect status entry in the database and incorrect pop-up with transaction status](https://github.com/elakovnick24/Elakov_Nick_Project/issues/7 )
+* [Invalid record of the transaction status in the database](https://github.com/elakovnick24/Elakov_Nick_Project/issues/8 )
+* [Missing pop-up "Incorrect data entered"](https://github.com/elakovnick24/Elakov_Nick_Project/issues/9 )
+* [There is no error message when entering incorrect data](https://github.com/elakovnick24/Elakov_Nick_Project/issues/10 )
 
 
-### _Общие рекомендации:_
+### _ General recommendations:_
 
-* Создать документацию для данного приложения
-* Добавить функциональность блокирования кнопки "Продолжить" до тех пор, пока все поля не будут заполнены корректными значениями
-* Добавить изменение цвета кнопок "Купить" и "Купить в кредит" при переключении между двумя вкладками для удобства пользователя 
-* Заменить предупреждения "Неверный формат" на более информативные
+* Create documentation for this application
+* Add the functionality of blocking the "Continue" button until all fields are filled with the correct values
+* Add a change in the color of the "Buy" and "Buy on Credit" buttons when switching between two tabs for user convenience 
+* Replace the "Incorrect Format" warnings with more informative ones
 
 
