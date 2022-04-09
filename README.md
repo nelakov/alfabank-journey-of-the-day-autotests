@@ -1,74 +1,74 @@
-# _Дипломный проект профессии «Тестировщик»_
+# _# _diploma project of the profession "Tester"_
 
-[План автоматизации](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Plan.md)
+[Automation plan](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Plan.md)
 
-[Отчет по итогам тестирования](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Report.md)
+[Report on the results of testing](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Report.md)
 
-[Отчет по итогам автоматизации](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Summary.md)
-
----------------------
-
-## _Описание приложения_
-
-Веб-сервис "Путешествие дня".
-
-Приложение предлагает с помощью двух способов купить тур по фиксированной сумме:
-
-1. Обычная оплата по дебетовой карте
-1. Уникальная технология: выдача кредита по данным банковской карты
-
-Само приложение не обрабатывает данные по картам, а пересылает их банковским сервисам:
-* сервису платежей (Payment Gate)
-* кредитному сервису (Credit Gate)
-
-Приложение должно в собственной СУБД сохранять информацию о том, каким способом был совершён платёж и успешно ли он был совершён (при этом данные карт сохранять не допускается).
+[Report on the results of automation](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Summary.md)
 
 ---------------------
 
-## _Инструкция по запуску_
+## _Application Description_
 
-1. Склонировать репозиторий  
+Web service "Journey of the day".
+
+The application offers two ways to buy a tour for a fixed amount:
+
+1. Regular debit card payment
+1. Unique technology: issuing credit according to bank card data
+
+The application itself does not process card data, but sends them to banking services:
+* payment service (Payment Gate)
+* credit service (Credit Gate)
+
+The application must store information in its own DBMS about how the payment was made and whether it was made successfully (at the same time, it is not allowed to save card data).
+
+---------------------
+
+## _Launch Instructions_
+
+1. Clone a repository  
     <code>git clone https://github.com/elakovnick24/Elakov_Nick_Project.git </code>
 
-2. Запустить контейнеры docker:  
+2. Launch docker containers: 
 
-   Для того, чтобы запустить с MySql, PostgreSQL и Node.js нужно использовать команду
+   In order to run with MySQL, PostgreSQL and Node.js need to use the command
    `docker-compose up -d --build`; 
-   _чтобы образ не пересобирался каждый раз необходимо убрать флаг --build_
+  _in order for the image not to be rebuilt every time, you need to remove the --build flag_
 
-3. Запустить приложение:  
+3. Launch the application:  
 
-   -  Перед запуском под MySQL проверить url подключения в файле **application.properties**
+   -  Before launching under MySQL, check the connection url in the **application.properties file**
     `
     spring.datasource.url=jdbc:mysql://localhost:3306/app
     `
     
-   -  для запуска под PostgreSQL проверить url подключения в файле **application.properties** 
+   -  to run under PostgreSQL, check the connection url in the **application.properties file**
     `
     spring.datasource.url=jdbc:postgresql://localhost:5432/app
    `
    
-   - Выполнить команду 
+   - Execute the command 
   
      `
      java -jar ./artifacts/aqa-shop.jar
      `
 
-4. Запустить тесты:  
+4. Run tests:  
 
    * для запуска тестов под базой данных MySQL 
     
      `
      gradlew -Ddb.url=jdbc:mysql://localhost:3306/app clean test
      `
-   * для запуска тестов под базой данных PostgreSQL 
+   * to run tests under the PostgreSQL database 
     
      `
      gradlew -Ddb.url=jdbc:postgresql://localhost:5432/app clean test
      `
 
-5. Сформировать отчеты командой:  
+5. Generate reports with the command:  
    <code>gradlew allureReport</code>  
 
-6. Открыть отчеты в браузере командой:  
+6. Open reports in the browser with the command: 
    <code>gradlew allureServe</code>
