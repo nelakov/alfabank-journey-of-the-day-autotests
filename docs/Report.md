@@ -1,6 +1,6 @@
 # _The report on the results of testing_
 
-### _ Brief description_
+### _Brief description_
 
 The web service "Journey of the Day" was tested, which is a comprehensive service that interacts with the DBMS and the API of the Bank.
 
@@ -16,7 +16,7 @@ The service has been tested using the following tools:
 * Lombok 5.2.1
 * MySQL and PostgreSQL
 
-### _ Number of test cases_
+### _Number of test cases_
 
 The total number of test cases is 26 (4 positive, 22 negative)
 
@@ -29,7 +29,7 @@ The total number of test cases is 26 (4 positive, 22 negative)
 ### _The scenarios that are prescribed in the test plan have been tested:_
 [Test Automation Plan](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Plan.md )
 
-#### _ Found bugs_
+#### _Found bugs_
 * [Spelling error in the name of the tour](https://github.com/elakovnick24/Elakov_Nick_Project/issues/1 )
 * [When paying with an invalid card, error and success messages appear simultaneously](https://github.com/elakovnick24/Elakov_Nick_Project/issues/2 )
 * [credit_id is not created in the DB in the order_entity table](https://github.com/elakovnick24/Elakov_Nick_Project/issues/3 )
@@ -42,7 +42,7 @@ The total number of test cases is 26 (4 positive, 22 negative)
 * [There is no error message when entering incorrect data](https://github.com/elakovnick24/Elakov_Nick_Project/issues/10 )
 
 
-### _ General recommendations:_
+### _General recommendations:_
 
 * Create documentation for this application
 * Add the functionality of blocking the "Continue" button until all fields are filled with the correct values
