@@ -1,20 +1,20 @@
-# _Отчет по итогам автоматизации_
+# _ Report on the results of automation_
 
-### _Запланировано / Сделано_
+### _planned / Done_
 
-* Запланировано: 26 сценариев
-* Сделано: 26 сценариев
+* Planned: 26 scenarios
+* Done: 26 scenarios
 
-### _Причины, по которым что-то не было сделано_
+### _The reasons why something wasn't done_
 
-Все было реализовано, что было в плане.
+Everything was implemented that was in the plan.
 
-### _Сработавшие риски_
+### _worked risks_
 
-* сложность запуска приложения для конфигурации с разными базами данных
-* Отсутствие ТЗ к сервису
+* the complexity of running the application for configuration with different databases
+* Lack of technical specifications for the service
 
 
-### _Общий итог по времени_
-* Запланировано: 70-75 ч/часов
-* Потрачено: 65 ч/часов
+### _ Total time total_
+* Planned: 70-75 h/h
+* Spent: 65 hours/hour
