@@ -1,4 +1,4 @@
-# _# _diploma project of the profession "Tester"_
+# _Diploma project of the profession "Tester"_
 
 [Automation plan](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Plan.md)
 
