@@ -1,6 +1,6 @@
-# _ Report on the results of automation_
+# _Report on the results of automation_
 
-### _planned / Done_
+### _Planned / Done_
 
 * Planned: 26 scenarios
 * Done: 26 scenarios
@@ -9,12 +9,12 @@
 
 Everything was implemented that was in the plan.
 
-### _worked risks_
+### _Worked risks_
 
 * the complexity of running the application for configuration with different databases
 * Lack of technical specifications for the service
 
 
-### _ Total time total_
+### _Total time total_
 * Planned: 70-75 h/h
 * Spent: 65 hours/hour
