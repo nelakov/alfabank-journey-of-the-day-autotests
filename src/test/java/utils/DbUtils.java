@@ -1,7 +1,6 @@
-package data;
+package utils;
 
 import lombok.val;
-import lombok.var;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 

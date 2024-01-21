@@ -1,5 +1,6 @@
-package data;
+package utils;
 
+import data.Card;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
