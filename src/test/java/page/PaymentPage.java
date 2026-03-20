@@ -2,6 +2,7 @@ package page;
 
 import com.codeborne.selenide.SelenideElement;
 import data.Card;
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
@@ -36,15 +37,14 @@ public class PaymentPage {
     }
 
     public void notificationOkIsVisible() {
-        notificationOK.waitUntil(visible, 12000);
+        notificationOK.shouldBe(visible, Duration.ofMillis(12000));
     }
 
     public void notificationErrorIsVisible() {
-        notificationError.waitUntil(visible, 12000);
+        notificationError.shouldBe(visible, Duration.ofMillis(12000));
     }
 
     public boolean inputInvalidIsVisible() {
         return inputInvalid.isDisplayed();
     }
-
 }
