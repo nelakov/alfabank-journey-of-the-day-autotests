@@ -2,8 +2,8 @@ package test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.Card;
-import data.DataGenerator;
-import data.DbUtils;
+import utils.DataGenerator;
+import utils.DbUtils;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import page.CreditPage;

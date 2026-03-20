@@ -2,9 +2,9 @@ package test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.Card;
-import data.DataGenerator;
-
 import io.qameta.allure.selenide.AllureSelenide;
+import utils.DataGenerator;
+
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
