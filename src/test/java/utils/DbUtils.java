@@ -28,7 +28,7 @@ public class DbUtils {
             runner.update(conn, deleteOrderEntity);
             runner.update(conn, deletePaymentEntity);
             runner.update(conn, deleteCreditRequestEntity);
-             var count = runner.query(conn, countSQL, new ScalarHandler<>());
+            var count = runner.query(conn, countSQL, new ScalarHandler<>());
             System.out.println(count);
         }
     }
