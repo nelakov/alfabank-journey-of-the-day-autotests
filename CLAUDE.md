@@ -41,9 +41,9 @@ Default system property values: `db.user=app`, `db.password=pass`, `sut.url=http
 
 **All source lives under `src/test/java/`** — there is no main source; this is a pure test project.
 
-- **`data/Card.java`** — Lombok POJO (number, month, year, holder, cvc). All test data flows through this type.
-- **`page/`** — Page Object Model. `StartPage` navigates to `PaymentPage` or `CreditPage`. Payment and Credit pages are near-identical (different heading text and notification timeouts: 12s vs 15s).
-- **`utils/DataGenerator`** — Factory methods for card fixtures. Card numbers ending `4441` = APPROVED, `4442` = DECLINED, `4449` = unknown to gate.
+- **`data/Card.java`** — Java record (number, month, year, holder, cvc). Immutable. All test data flows through this type.
+- **`page/`** — Page Object Model. `FormPage` base class holds all form fields, `fillData()`, and notification assertions. `PaymentPage` and `CreditPage` extend it with heading text and timeout only. `StartPage` navigates to either.
+- **`utils/DataGenerator`** — Factory methods for card fixtures using dynamic `YearMonth` dates. Card numbers ending `4441` = APPROVED, `4442` = DECLINED, `4449` = unknown to gate.
 - **`utils/ApiUtils`** — REST-Assured wrapper; POSTs card JSON to `/api/v1/pay` or `/api/v1/credit`.
 - **`utils/DbUtils`** — Direct JDBC queries via Commons-DbUtils. Reads `payment_entity.status`, `credit_request_entity.status`, `order_entity` count. `clearTables()` wipes all three tables.
 - **`test/BuyingTripUiTest`** — Parametrized form-validation tests (CSV-driven from `incorrectValues.cvs`) + expired/future-date tests.
@@ -58,8 +58,8 @@ Default system property values: `db.user=app`, `db.password=pass`, `sut.url=http
 
 ## Key Conventions
 
-- Java 21, Gradle 8.5, Lombok for data classes.
+- Java 25, Gradle 9.4.1, Java records for data classes.
 - Dual-database support (MySQL 8.3 / PostgreSQL 16.1) — switched via `db.url` system property and SUT `--spring.datasource.url` flag.
 - Page objects return page instances for fluent navigation (`goToPaymentPage()` → `PaymentPage`).
-- Notification assertions use explicit waits (12–15 seconds) — do not reduce these, the SUT is slow to respond through the gate simulator.
+- Notification assertions use explicit waits (12–15 seconds via `FormPage.notificationTimeout`) — do not reduce these, the SUT is slow to respond through the gate simulator.
 - CSV test data file is `incorrectValues.cvs` (not `.csv`) — this is intentional, do not rename.
