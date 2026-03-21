@@ -1,0 +1,81 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+
+      - name: Start infrastructure
+        run: docker-compose up -d --build
+
+      - name: Wait for MySQL to be ready
+        run: |
+          for i in {1..30}; do
+            docker exec $(docker ps -qf "name=mysql") mysqladmin ping -u app -ppass --silent && break
+            echo "Waiting for MySQL... ($i)"
+            sleep 2
+          done
+
+      - name: Start SUT
+        run: java -jar artifacts/aqa-shop.jar &
+
+      - name: Wait for SUT to be ready
+        run: |
+          for i in {1..30}; do
+            curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/ | grep -q 200 && break
+            echo "Waiting for SUT... ($i)"
+            sleep 2
+          done
+
+      - name: Run tests
+        run: |
+          ./gradlew test \
+            -Ddb.url=jdbc:mysql://localhost:3306/app \
+            -Dselenide.headless=true
+
+      - name: Generate Allure report
+        uses: simple-elf/allure-report-action@v1.12
+        if: always()
+        with:
+          allure_results: build/allure-results
+
+      - name: Upload Allure report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-report
+          path: allure-history
+          retention-days: 30
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: build/reports/tests/test
+          retention-days: 30
+
+      - name: Upload failure videos
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-failure-videos
+          path: videos/*.mp4
+          retention-days: 30
+          if-no-files-found: ignore
