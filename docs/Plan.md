@@ -1,132 +1,166 @@
-# _Automation Plan_
+# Automation Plan
 
-## _The list of automated test cases_
+## Application under test
 
-Valid data when filling in the input fields should be considered:
+The web service "Journey of the Day" — a tour-booking application with two purchase flows:
 
-1. Card number: 16 digits in the format **** **** **** ****
-1. Month: 01-12, but not earlier than the current month if the current year is specified 
-1. Year: the last two digits of the serial number of the year, not earlier than the current year, not more than 5 years from the current year
-1. Owner: alphabetic characters of the Latin alphabet
-1. CVC: Numbers - 3 pcs
-. 1. Test data set - maps (data.json file):
-* 4444 4444 4444 4441 , status APPROVED
-* 4444 4444 4444 4442 , status DECLINED
+| Flow | Button | Form heading | Screenshot |
+|:-----|:-------|:-------------|:-----------|
+| Debit card payment | "Купить" | "Оплата по карте" | [Payment form](ui-payment-form.png) |
+| Credit by card data | "Купить в кредит" | "Кредит по данным карты" | [Credit form](ui-credit-form.png) |
 
-Databases:
-* MySql
-* PostgreSQL 
+**Landing page:**
 
-### _test scenarios_
+![Landing page](ui-landing-page.png)
 
-#### _Positive scenarios_
-1. Payment by card with the APPROVED status  
-The card number is 4444 4444 4444 4441, the other fields are filled with correct values  
-Expected result: a pop-up window "Operation approved by the Bank" appeared, an entry with the APPROVED status appeared in the payment_entity database 
+## Valid data for input fields
 
-1. Credit according to the card data with the APPROVED status   
-The card number is 4444 4444 4444 4441, the other fields are filled with correct values  
-Expected result: a pop-up window "Operation approved by the Bank" appeared, an entry with the APPROVED status appeared in the credit_request_entity database 
+1. Card number: 16 digits in the format `**** **** **** ****`
+2. Month: 01–12, but not earlier than the current month if the current year is specified
+3. Year: last two digits, not earlier than the current year, not more than 5 years ahead
+4. Owner: Latin alphabetic characters
+5. CVC: 3 digits
 
-1. Payment by card with DECLINED status    
-The card number is 4444 4444 4444 4442, the other fields are filled with correct values   
-Expected result: a pop-up window "Error! The bank refused to perform the operation", an entry with the DECLINED status appeared in the payment_entity database 
+### Test data (from `data.json`):
 
-1. Credit according to the card data with the DECLINED status  
-The card number is 4444 4444 4444 4442, the other fields are filled with correct values  
-Expected result: a pop-up window "Error! The bank refused to carry out the operation", an entry with the DECLINED status appeared in the credit_request_entity database
+| Card Number | Status |
+|:------------|:-------|
+| `4444 4444 4444 4441` | APPROVED |
+| `4444 4444 4444 4442` | DECLINED |
 
-#### _negative scenarios_
-1. Payment using a non-existent card   
-The card number is 4444 4444 4444 4443, the other fields are filled with correct values  
-Expected result: a pop-up window "Error! The bank refused to carry out the operation", no new entry appeared in the DB in payment_entity 
+### Databases: MySQL, PostgreSQL
 
-1. Credit according to non-existent card data   
-The card number is 4444 4444 4444 4443, the other fields are filled with correct values  
-Expected result: a pop-up window "Error! The bank refused to carry out the operation", no new entry appeared in the credit_request_entity database
+---
 
-1. Payment by card, invalid number is specified   
-The card number is 4444 4444 4444 444, the other fields are filled with correct values  
-Expected result: an error message "Incorrect format" appeared under the Card Number field, no new entry appeared in the payment_entity database 
+## Test scenarios
 
-1. Credit according to the card data, invalid number is indicated    
-The card number is 4444 4444 4444 444, the other fields are filled with correct values  
-Expected result: an error message "Incorrect format" appeared under the Card Number field, no new entry appeared in the credit_request_entity database
+### Positive scenarios
 
-1. Payment by expired card (month)  
-Card number 4444 4444 4444 4441, specify the previous month, the current year, the remaining fields are filled with correct values  
-Expected result: an error message appeared under the Month field "The card expiration date is incorrect", a new entry did not appear in the payment_entity database 
+**1. Payment by card with APPROVED status**
+Card: `4444 4444 4444 4441`, other fields — valid values.
+Expected: notification "Операция одобрена Банком" ([screenshot](ui-credit-approved.png)), `payment_entity.status = APPROVED`.
 
-1. Credit according to expired card data (month)  
-Card number 4444 4444 4444 4441, specify the previous month, the current year, the remaining fields are filled with correct values  
-Expected result: an error message appeared under the Month field "The card expiration date is incorrect", a new entry did not appear in the credit_request_entity database
+**2. Credit by card data with APPROVED status**
+Card: `4444 4444 4444 4441`, other fields — valid values.
+Expected: notification "Операция одобрена Банком" ([screenshot](ui-credit-approved.png)), `credit_request_entity.status = APPROVED`.
 
-1. Payment according to the card data, the invalid month is specified   
-The card number is 4444 4444 4444 4441, enter 00 in the Month field, the other fields are filled with correct values  
-Expected result: an error message appeared under the Month field "The card expiration date is incorrect", a new entry did not appear in the payment_entity database 
+**3. Payment by card with DECLINED status**
+Card: `4444 4444 4444 4442`, other fields — valid values.
+Expected: notification "Банк отказал в проведении операции" ([screenshot](ui-credit-declined.png)), `payment_entity.status = DECLINED`.
 
-1. Credit according to the card data, invalid month is specified   
-The card number is 4444 4444 4444 4441, enter 00 in the Month field, the other fields are filled with correct values  
-Expected result: an error message appeared under the Month field "The card expiration date is incorrect", a new entry did not appear in the credit_request_entity database
+**4. Credit by card data with DECLINED status**
+Card: `4444 4444 4444 4442`, other fields — valid values.
+Expected: notification "Банк отказал в проведении операции" ([screenshot](ui-credit-declined.png)), `credit_request_entity.status = DECLINED`.
 
-1. Payment by expired card (year)  
-Card number 4444 4444 4444 4441, specify the previous year, the remaining fields are filled with correct values  
-Expected result: an error message "Card expired" appeared under the Year field, no new entry appeared in the payment_entity database 
+### Negative scenarios
 
-1. Credit according to expired card data (year)  
-Card number 4444 4444 4444 4441, specify the previous year, the remaining fields are filled with correct values  
-Expected result: an error message "Card expired" appeared under the Year field, no new entry appeared in the credit_request_entity database
+**5. Payment using a non-existent card**
+Card: `4444 4444 4444 4443`, other fields — valid values.
+Expected: error notification, no new record in `payment_entity`.
 
-1. Payment according to the card data, the invalid year is specified   
-The card number is 4444 4444 4444 4441, in the Year field specify "the last two digits of the current year + 6", the remaining fields are filled with correct values  
-Expected result: an error message appeared under the Year field "The card expiration date is incorrect", a new entry did not appear in the payment_entity database 
+**6. Credit by non-existent card data**
+Card: `4444 4444 4444 4443`, other fields — valid values.
+Expected: error notification, no new record in `credit_request_entity`.
 
-1. Credit according to the card data, the invalid year is indicated   
-The card number is 4444 4444 4444 4441, in the Year field specify "the last two digits of the current year + 6", the remaining fields are filled with correct values  
-Expected result: an error message appeared under the Year field "The card expiration date is incorrect", a new entry did not appear in the credit_request_entity database
+**7. Payment — invalid card number**
+Card: `4444 4444 4444 444` (15 digits), other fields — valid values.
+Expected: validation error "Неверный формат" under Card Number field, no DB record.
 
-1. Payment according to the card data, an incorrect value is specified in the Owner field  
-The card number is 4444 4444 4444 4441, incorrect data should be specified in the Owner field, the remaining fields are filled with correct values  
-Expected result: an error message appeared under the Owner field, no new entry appeared in the DB in payment_entity 
+**8. Credit — invalid card number**
+Card: `4444 4444 4444 444` (15 digits), other fields — valid values.
+Expected: validation error "Неверный формат" under Card Number field, no DB record.
 
-1. Credit according to the card data, an incorrect value is specified in the Owner field   
-The card number is 4444 4444 4444 4441, incorrect data should be specified in the Owner field, the remaining fields are filled with correct values  
-Expected result: an error message appeared under the Owner field, no new entry appeared in the credit_request_entity database
+**9. Payment — expired card (month)**
+Card: `4444 4444 4444 4441`, month = previous month, year = current year.
+Expected: validation error "Неверно указан срок действия карты" under Month field.
 
-1. Payment according to the card data, an incorrect value is specified in the CVC/CVV field   
-The card number is 4444 4444 4444 4441, specify 0 in the CVC/CVV field, the other fields are filled with correct values  
-Expected result: an error message "Invalid format" appeared under the CVC/CVV field, no new entry appeared in the payment_entity database 
+**10. Credit — expired card (month)**
+Card: `4444 4444 4444 4441`, month = previous month, year = current year.
+Expected: validation error "Неверно указан срок действия карты" under Month field.
 
-1. Credit according to the card data, an incorrect value is specified in the CVC/CVV field   
-The card number is 4444 4444 4444 4441, specify 0 in the CVC/CVV field, the other fields are filled with correct values  
-Expected result: an error message "Invalid format" appeared under the CVC/CVV field, no new entry appeared in the credit_request_entity database
+**11. Payment — invalid month (00)**
+Card: `4444 4444 4444 4441`, month = `00`.
+Expected: validation error "Неверно указан срок действия карты" under Month field.
 
-## _The list of tools used with the justification of the choice_
+**12. Credit — invalid month (00)**
+Card: `4444 4444 4444 4441`, month = `00`.
+Expected: validation error "Неверно указан срок действия карты" under Month field.
 
-* Java 25 — language for writing auto-tests, with modern features (records, var, pattern matching)
-* Gradle 9.4.1 — build automation and dependency management
-* JUnit 5.14.3 — test framework with parameterized tests and display names
-* Selenide 7.15.0 — web UI testing framework based on Selenium WebDriver
-* REST-Assured 6.0.0 — API testing library
-* Docker Compose — multi-container orchestration for gate simulator and databases
-* Allure 2.33.0 — test reporting framework
+**13. Payment — expired card (year)**
+Card: `4444 4444 4444 4441`, year = previous year.
+Expected: validation error "Истёк срок действия карты" under Year field.
 
-## _The list and description of possible risks in automation_
-* Due to the lack of technical specifications and any documentation, it is difficult to understand how the application should work and what system behavior should be considered an error
-* The real system and real data are likely to be different from the SUT and test data, and test automation may be useless
-* Using third-party libraries and frameworks may increase the risk of technical problems
-* Possible problems due to the need to support two DBMS (MySQL, Postgres)
-* The absence of test_id complicates the writing and support of tests
+**14. Credit — expired card (year)**
+Card: `4444 4444 4444 4441`, year = previous year.
+Expected: validation error "Истёк срок действия карты" under Year field.
 
-## _interval assessment taking into account risks (in hours)_
-Setting up the test environment - 8  
-Writing and debugging autotests - 30  
-Test run and issue - 8 institution  
-Elimination of comments - 6  
-Preparation of a report on the results of automated testing - 8  
-Preparation of a report on the results of automation - 8  
-**Total, taking into account risks: ~70 hours**
+**15. Payment — year exceeds 5-year limit**
+Card: `4444 4444 4444 4441`, year = current + 6.
+Expected: validation error "Неверно указан срок действия карты" under Year field.
 
-## _Plan of delivery of works_
-Automation - 28.10.2020  
-Preparation of accounting documents - 31.10.2020
+**16. Credit — year exceeds 5-year limit**
+Card: `4444 4444 4444 4441`, year = current + 6.
+Expected: validation error "Неверно указан срок действия карты" under Year field.
+
+**17. Payment — invalid Owner field**
+Card: `4444 4444 4444 4441`, owner = invalid data (Cyrillic, special chars).
+Expected: validation error under Owner field, no DB record.
+
+**18. Credit — invalid Owner field**
+Card: `4444 4444 4444 4441`, owner = invalid data (Cyrillic, special chars).
+Expected: validation error under Owner field, no DB record.
+
+**19. Payment — invalid CVC/CVV**
+Card: `4444 4444 4444 4441`, CVC = `0`.
+Expected: validation error "Неверный формат" under CVC/CVV field, no DB record.
+
+**20. Credit — invalid CVC/CVV**
+Card: `4444 4444 4444 4441`, CVC = `0`.
+Expected: validation error "Неверный формат" under CVC/CVV field, no DB record.
+
+---
+
+## Tools used (with rationale)
+
+| Tool | Purpose |
+|:-----|:--------|
+| Java 25 | Test language — modern features (records, var, pattern matching) |
+| Gradle 9.4.1 | Build automation and dependency management |
+| JUnit 5.14.3 | Test framework with parameterized tests and display names |
+| Selenide 7.15.0 | Web UI testing — built on Selenium WebDriver |
+| REST-Assured 6.0.0 | API testing library |
+| Docker Compose | Multi-container orchestration for gate simulator and databases |
+| Allure 2.33.0 | Test reporting framework |
+
+---
+
+## Risks
+
+- No technical specification or documentation — hard to distinguish expected behavior from bugs
+- Real production data likely differs from test fixtures (`data.json`), limiting test portability
+- Third-party library compatibility issues across versions
+- Dual-DBMS support (MySQL + PostgreSQL) increases maintenance overhead
+- Absence of `test_id` attributes in the UI complicates selector stability
+
+---
+
+## Time estimate (including risks)
+
+| Phase | Hours |
+|:------|------:|
+| Test environment setup | 8 |
+| Writing and debugging autotests | 30 |
+| Test execution and bug reporting | 8 |
+| Bug fix verification | 6 |
+| Test results report | 8 |
+| Automation summary report | 8 |
+| **Total** | **~70** |
+
+---
+
+## Delivery schedule
+
+| Milestone | Date |
+|:----------|:-----|
+| Automation complete | 28.10.2020 |
+| Documentation delivered | 31.10.2020 |
