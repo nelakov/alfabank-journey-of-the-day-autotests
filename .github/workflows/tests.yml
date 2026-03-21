@@ -22,7 +22,7 @@ jobs:
           java-version: '25'
 
       - name: Start infrastructure
-        run: docker-compose up -d --build
+        run: docker compose up -d --build
 
       - name: Wait for MySQL to be ready
         run: |
