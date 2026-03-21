@@ -1,20 +1,32 @@
-# _Report on the results of automation_
+# Automation Summary
 
-### _Planned / Done_
+### Planned vs Done
 
-* Planned: 26 scenarios
-* Done: 26 scenarios
+| Metric | Value |
+|:-------|:------|
+| Planned scenarios | 26 |
+| Implemented scenarios | 26 |
+| Completion | 100% |
 
-### _The reasons why something wasn't done_
+Everything from the [Automation Plan](Plan.md) was implemented.
 
-Everything was implemented that was in the plan.
+### Risks that materialized
 
-### _Worked risks_
+- **Dual-database complexity** — configuring and running the SUT against MySQL and PostgreSQL required extra setup effort and careful switching between JDBC URLs.
+- **No technical specification** — absence of documentation made it difficult to distinguish between expected behavior and bugs, especially around form validation rules and notification timing.
 
-* the complexity of running the application for configuration with different databases
-* Lack of technical specifications for the service
+### Time spent
 
+| Metric | Hours |
+|:-------|------:|
+| Planned | 70–75 |
+| Actual | ~65 |
 
-### _Total time total_
-* Planned: 70-75 h/h
-* Spent: 65 hours/hour
+### Artifacts
+
+| Document | Link |
+|:---------|:-----|
+| Automation Plan | [Plan.md](Plan.md) |
+| Test Report | [Report.md](Report.md) |
+| Allure Report | Generated via `./gradlew allureServe` |
+| Architecture Diagram | [architecture.png](architecture.png) |
