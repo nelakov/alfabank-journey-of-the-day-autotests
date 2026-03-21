@@ -4,6 +4,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import data.Card;
 import utils.DataGenerator;
 import utils.DbClient;
+import io.qameta.allure.Description;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import page.CreditPage;
@@ -40,6 +41,8 @@ public class BuyingTripDbTest {
 
     @Test
     @DisplayName("Should confirm payment with APPROVED card status")
+    @Description("Fill payment form with APPROVED card (4441), submit, verify success notification and APPROVED status in payment_entity. " +
+            "See expected UI: docs/ui-credit-approved.png")
     void shouldConfirmPaymentWithValidCard() throws SQLException {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
@@ -50,6 +53,8 @@ public class BuyingTripDbTest {
 
     @Test
     @DisplayName("Should confirm credit with APPROVED card status")
+    @Description("Fill credit form with APPROVED card (4441), submit, verify success notification and APPROVED status in credit_request_entity. " +
+            "See expected UI: docs/ui-credit-approved.png")
     void shouldConfirmCreditWithValidCard() throws SQLException {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
@@ -60,6 +65,8 @@ public class BuyingTripDbTest {
 
     @Test
     @DisplayName("Should decline payment with DECLINED card status")
+    @Description("Fill payment form with DECLINED card (4442), submit, verify error notification and DECLINED status in payment_entity. " +
+            "See expected UI: docs/ui-credit-declined.png")
     void shouldNotConfirmPaymentWithDeclinedCard() throws SQLException {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
@@ -70,6 +77,8 @@ public class BuyingTripDbTest {
 
     @Test
     @DisplayName("Should decline credit with DECLINED card status")
+    @Description("Fill credit form with DECLINED card (4442), submit, verify error notification and DECLINED status in credit_request_entity. " +
+            "See expected UI: docs/ui-credit-declined.png")
     void shouldNotConfirmCreditWithDeclinedCard() throws SQLException {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
@@ -80,6 +89,7 @@ public class BuyingTripDbTest {
 
     @Test
     @DisplayName("Should not create order for unknown card on payment page")
+    @Description("Fill payment form with unknown card (4449), submit, verify error notification and zero records in order_entity.")
     void shouldNotConfirmPaymentWithFakeCard() throws SQLException {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
@@ -90,6 +100,7 @@ public class BuyingTripDbTest {
 
     @Test
     @DisplayName("Should not create order for unknown card on credit page")
+    @Description("Fill credit form with unknown card (4449), submit, verify error notification and zero records in order_entity.")
     void shouldNotConfirmCreditWithFakeCard() throws SQLException {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
