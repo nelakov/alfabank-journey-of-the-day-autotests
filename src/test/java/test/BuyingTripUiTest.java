@@ -36,7 +36,7 @@ public class BuyingTripUiTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/incorrectValues.cvs", numLinesToSkip = 1)
-    @DisplayName("Должен показывать сообщение об ошибке при заполнении полей невалидными значениями")
+    @DisplayName("Should show validation error for incorrect field values on payment page")
     void shouldShowWarningIfValueIsIncorrectForPayment(String number, String month, String year, String owner, String cvc, String message) {
         Card incorrectValuesCard = new Card(number, month, year, owner, cvc);
         StartPage startPage = new StartPage();
@@ -47,7 +47,7 @@ public class BuyingTripUiTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/incorrectValues.cvs", numLinesToSkip = 1)
-    @DisplayName("Должен показывать сообщение об ошибке при заполнении полей невалидными значениями")
+    @DisplayName("Should show validation error for incorrect field values on credit page")
     void shouldShowWarningIfValueIsIncorrectForCredit(String number, String month, String year, String owner, String cvc, String warning, String message) {
         Card incorrectValues = new Card(number, month, year, owner, cvc);
         StartPage startPage = new StartPage();
@@ -57,43 +57,43 @@ public class BuyingTripUiTest {
     }
 
     @Test
-    @DisplayName("Должен показывать сообщение об ошибке, если срок карты истек, страница оплаты")
+    @DisplayName("Should show validation error for expired card on payment page")
     void shouldShowWarningIfCardIsExpiredForPayment() {
         Card expiredCard = DataGenerator.getInvalidExpDateCard(-1);
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(expiredCard);
-        assertTrue(paymentPage.isValidationErrorVisible(), "Должен показывать сообщение об ошибке, если срок карты истек, страница оплаты");
+        assertTrue(paymentPage.isValidationErrorVisible(), "Expected validation error for expired card on payment page");
     }
 
     @Test
-    @DisplayName("Должен показывать сообщение об ошибке, если срок карты истек, страница кредита")
+    @DisplayName("Should show validation error for expired card on credit page")
     void shouldShowWarningIfCardIsExpiredForCredit() {
         Card expiredCard = DataGenerator.getInvalidExpDateCard(-1);
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(expiredCard);
-        assertTrue(creditPage.isValidationErrorVisible(), "Должен показывать сообщение об ошибке, если срок карты истек, страница кредита");
+        assertTrue(creditPage.isValidationErrorVisible(), "Expected validation error for expired card on credit page");
     }
 
     @Test
-    @DisplayName("Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница оплаты")
+    @DisplayName("Should show validation error when expiration date exceeds 5 years on payment page")
     void shouldShowWarningIfExpirationDateMoreThan5YearsForPayment() {
         Card invalidExpDateCard = DataGenerator.getInvalidExpDateCard(61);
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(invalidExpDateCard);
-        assertTrue(paymentPage.isValidationErrorVisible(), "Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница оплаты");
+        assertTrue(paymentPage.isValidationErrorVisible(), "Expected validation error for expiration date exceeding 5 years on payment page");
     }
 
     @Test
-    @DisplayName("Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница кредита")
+    @DisplayName("Should show validation error when expiration date exceeds 5 years on credit page")
     void shouldShowWarningIfExpirationDateMoreThan5YearsForCredit() {
         Card invalidExpDateCard = DataGenerator.getInvalidExpDateCard(61);
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(invalidExpDateCard);
-        assertTrue(creditPage.isValidationErrorVisible(), "Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница кредита");
+        assertTrue(creditPage.isValidationErrorVisible(), "Expected validation error for expiration date exceeding 5 years on credit page");
     }
 
 }

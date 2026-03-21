@@ -39,7 +39,7 @@ public class BuyingTripDbTest {
     }
 
     @Test
-    @DisplayName("Должен подтверждать покупку по карте со статусом APPROVED")
+    @DisplayName("Should confirm payment with APPROVED card status")
     void shouldConfirmPaymentWithValidCard() throws SQLException {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
@@ -49,7 +49,7 @@ public class BuyingTripDbTest {
     }
 
     @Test
-    @DisplayName("Должен подтверждать кредит по карте со статусом APPROVED")
+    @DisplayName("Should confirm credit with APPROVED card status")
     void shouldConfirmCreditWithValidCard() throws SQLException {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
@@ -59,7 +59,7 @@ public class BuyingTripDbTest {
     }
 
     @Test
-    @DisplayName("Не должен подтверждать покупку по карте со статусом DECLINED")
+    @DisplayName("Should decline payment with DECLINED card status")
     void shouldNotConfirmPaymentWithDeclinedCard() throws SQLException {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
@@ -69,7 +69,7 @@ public class BuyingTripDbTest {
     }
 
     @Test
-    @DisplayName("Не должен подтверждать кредит по карте со статусом DECLINED")
+    @DisplayName("Should decline credit with DECLINED card status")
     void shouldNotConfirmCreditWithDeclinedCard() throws SQLException {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
@@ -79,7 +79,7 @@ public class BuyingTripDbTest {
     }
 
     @Test
-    @DisplayName("Не должен подтверждать покупку по несуществующей карте")
+    @DisplayName("Should not create order for unknown card on payment page")
     void shouldNotConfirmPaymentWithFakeCard() throws SQLException {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
@@ -89,7 +89,7 @@ public class BuyingTripDbTest {
     }
 
     @Test
-    @DisplayName("Не должен подтверждать кредит по несуществующей карте")
+    @DisplayName("Should not create order for unknown card on credit page")
     void shouldNotConfirmCreditWithFakeCard() throws SQLException {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
