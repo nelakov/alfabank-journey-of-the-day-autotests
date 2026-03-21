@@ -45,7 +45,7 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(validCard);
-        paymentPage.notificationOkIsVisible();
+        paymentPage.shouldShowSuccessNotification();
         assertEquals("APPROVED", DbUtils.findPaymentStatus());
     }
 
@@ -55,7 +55,7 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(validCard);
-        creditPage.notificationOkIsVisible();
+        creditPage.shouldShowSuccessNotification();
         assertEquals("APPROVED", DbUtils.findCreditStatus());
     }
 
@@ -65,7 +65,7 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(declinedCard);
-        paymentPage.notificationErrorIsVisible();
+        paymentPage.isNotificationStatusErrorVisible();
         assertEquals("DECLINED", DbUtils.findPaymentStatus());
     }
 
@@ -75,7 +75,7 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(declinedCard);
-        creditPage.notificationErrorIsVisible();
+        creditPage.isNotificationStatusErrorVisible();
         assertEquals("DECLINED", DbUtils.findCreditStatus());
     }
 
@@ -86,7 +86,7 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(fakeCard);
-        paymentPage.notificationErrorIsVisible();
+        paymentPage.isNotificationStatusErrorVisible();
         assertEquals("0", DbUtils.countRecords());
     }
 
@@ -96,7 +96,7 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(fakeCard);
-        creditPage.notificationErrorIsVisible();
+        creditPage.isNotificationStatusErrorVisible();
         assertEquals("0", DbUtils.countRecords());
     }
 }
