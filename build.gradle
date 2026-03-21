@@ -36,13 +36,13 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
-    testImplementation 'com.codeborne:selenide:7.9.3'
-    testImplementation 'com.mysql:mysql-connector-j:9.3.0'
-    testImplementation 'org.postgresql:postgresql:42.7.7'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.14.3'
+    testImplementation 'com.codeborne:selenide:7.15.0'
+    testImplementation 'com.mysql:mysql-connector-j:9.6.0'
+    testImplementation 'org.postgresql:postgresql:42.7.10'
     testImplementation 'commons-dbutils:commons-dbutils:1.8.1'
-    testImplementation 'io.rest-assured:rest-assured:5.5.2'
-    testImplementation 'com.google.code.gson:gson:2.13.1'
+    testImplementation 'io.rest-assured:rest-assured:6.0.0'
+    testImplementation 'com.google.code.gson:gson:2.13.2'
     testImplementation "io.qameta.allure:allure-selenide:$allureVersion"
 }
 
