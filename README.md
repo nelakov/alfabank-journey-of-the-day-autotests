@@ -113,6 +113,7 @@ All UI and DB tests run against both **Payment** and **Credit** flows.
 | DB Access | Commons-DbUtils | 1.8.1 |
 | Serialization | Gson | 2.13.2 |
 | Code Gen | Lombok | 9.2.0 (plugin) |
+| Remote Browser | Selenium Grid 4 | standalone-chromium |
 | Infrastructure | Docker Compose | v2+ |
 
 ---
@@ -140,7 +141,7 @@ cd demo-alfabank-test-framework
 docker-compose up -d --build
 ```
 
-This spins up the gate simulator (port 9999), MySQL (port 3306), and PostgreSQL (port 5432).
+This spins up the gate simulator (port 9999), MySQL (port 3306), PostgreSQL (port 5432), Selenium Grid (port 4444), and noVNC viewer (port 7900).
 
 **3. Start the SUT**
 
@@ -168,6 +169,11 @@ The application will be available at `http://localhost:8080`.
 
 # Headless mode (CI)
 ./gradlew test -Dselenide.headless=true -Ddb.url=jdbc:mysql://localhost:3306/app
+
+# Through Selenium Grid (browser runs in Docker container)
+./gradlew test -Ddb.url=jdbc:mysql://localhost:3306/app \
+  -Dselenide.remote=http://localhost:4444/wd/hub \
+  -Dsut.url=http://host.docker.internal:8080/
 ```
 
 **5. View Allure report**
@@ -279,6 +285,22 @@ The gate simulator is a minimal Express.js service that mimics the bank payment 
 | Any other | HTTP 400 |
 
 It listens on port **9999** and handles both `/payment` and `/credit` endpoints.
+
+---
+
+## Selenium Grid
+
+The framework supports remote browser execution via [Selenium Grid 4](https://www.selenium.dev/documentation/grid/) Standalone. When enabled, tests run inside a Docker container with Chromium — no local browser installation required.
+
+| Service | Port | Purpose |
+|:--------|:-----|:--------|
+| Selenium Grid | 4444 | WebDriver endpoint |
+| noVNC | 7900 | Live browser view — open `http://localhost:7900` |
+| Video Recorder | — | Records each session, attaches to Allure on failure |
+
+**Video on failure**: `VideoAttachExtension` (JUnit `TestWatcher`) automatically attaches the recorded video to the Allure report when a test fails. Successful test recordings are deleted to save disk space.
+
+Pass `-Dselenide.remote=http://localhost:4444/wd/hub` to enable Grid mode. Without this flag, tests use the local browser.
 
 ---
 

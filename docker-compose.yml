@@ -28,3 +28,27 @@ services:
       - MYSQL_DATABASE=app
       - MYSQL_USER=app
       - MYSQL_PASSWORD=pass
+
+  selenium:
+    image: seleniarm/standalone-chromium:latest
+    ports:
+      - '4444:4444'
+      - '7900:7900'
+    shm_size: '2gb'
+    environment:
+      - SE_SCREEN_WIDTH=1920
+      - SE_SCREEN_HEIGHT=1080
+      - SE_VNC_NO_PASSWORD=1
+
+  selenium-video:
+    image: selenium/video:latest
+    depends_on:
+      - selenium
+    volumes:
+      - ./videos:/videos
+    environment:
+      - DISPLAY_CONTAINER_NAME=selenium
+      - SE_VIDEO_RECORD_STANDALONE=true
+      - SE_VIDEO_FILE_NAME=auto
+      - SE_VIDEO_CODEC=libx264
+      - SE_VIDEO_MOVFLAGS=
