@@ -11,9 +11,12 @@ import java.util.Comparator;
 
 public class VideoAttachExtension implements TestWatcher {
 
+    private static final Path VIDEOS_DIR = Path.of("videos");
+
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
-        try (var files = Files.list(Path.of("videos"))) {
+        if (!Files.exists(VIDEOS_DIR)) return;
+        try (var files = Files.list(VIDEOS_DIR)) {
             files.filter(f -> f.toString().endsWith(".mp4"))
                     .max(Comparator.comparingLong(f -> f.toFile().lastModified()))
                     .ifPresent(f -> {
@@ -34,7 +37,8 @@ public class VideoAttachExtension implements TestWatcher {
 
     @Override
     public void testSuccessful(ExtensionContext context) {
-        try (var files = Files.list(Path.of("videos"))) {
+        if (!Files.exists(VIDEOS_DIR)) return;
+        try (var files = Files.list(VIDEOS_DIR)) {
             files.filter(f -> f.toString().endsWith(".mp4"))
                     .max(Comparator.comparingLong(f -> f.toFile().lastModified()))
                     .ifPresent(f -> {
@@ -48,5 +52,4 @@ public class VideoAttachExtension implements TestWatcher {
             throw new RuntimeException("Failed to read videos directory", e);
         }
     }
-
 }
