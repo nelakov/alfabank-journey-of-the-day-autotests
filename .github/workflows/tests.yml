@@ -49,18 +49,12 @@ jobs:
             -Ddb.url=jdbc:mysql://localhost:3306/app \
             -Dselenide.headless=true
 
-      - name: Generate Allure report
-        uses: simple-elf/allure-report-action@v1.12
-        if: always()
-        with:
-          allure_results: build/allure-results
-
-      - name: Upload Allure report
+      - name: Upload Allure results
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: allure-report
-          path: allure-history
+          name: allure-results
+          path: build/allure-results
           retention-days: 30
 
       - name: Upload test results
