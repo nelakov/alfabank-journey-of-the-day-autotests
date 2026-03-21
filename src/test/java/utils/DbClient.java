@@ -41,7 +41,8 @@ public class DbClient {
     private static String getData(String query) throws SQLException {
         var runner = new QueryRunner();
         try (var conn = getConnection()) {
-            return String.valueOf(runner.query(conn, query, new ScalarHandler<>()));
+            Object result = runner.query(conn, query, new ScalarHandler<>());
+            return result == null ? null : result.toString();
         }
     }
 
