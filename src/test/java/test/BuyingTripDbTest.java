@@ -3,7 +3,7 @@ package test;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.Card;
 import utils.DataGenerator;
-import utils.DbUtils;
+import utils.DbClient;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import page.CreditPage;
@@ -24,7 +24,7 @@ public class BuyingTripDbTest {
 
     @BeforeEach
     public void openPage() throws SQLException {
-        DbUtils.clearTables();
+        DbClient.clearTables();
         String url = System.getProperty("sut.url");
         open(url);
     }
@@ -46,7 +46,7 @@ public class BuyingTripDbTest {
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(validCard);
         paymentPage.shouldShowSuccessNotification();
-        assertEquals("APPROVED", DbUtils.findPaymentStatus());
+        assertEquals("APPROVED", DbClient.findPaymentStatus());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class BuyingTripDbTest {
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(validCard);
         creditPage.shouldShowSuccessNotification();
-        assertEquals("APPROVED", DbUtils.findCreditStatus());
+        assertEquals("APPROVED", DbClient.findCreditStatus());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class BuyingTripDbTest {
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(declinedCard);
         paymentPage.isNotificationStatusErrorVisible();
-        assertEquals("DECLINED", DbUtils.findPaymentStatus());
+        assertEquals("DECLINED", DbClient.findPaymentStatus());
     }
 
     @Test
@@ -76,18 +76,18 @@ public class BuyingTripDbTest {
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(declinedCard);
         creditPage.isNotificationStatusErrorVisible();
-        assertEquals("DECLINED", DbUtils.findCreditStatus());
+        assertEquals("DECLINED", DbClient.findCreditStatus());
     }
 
     @Test
     @DisplayName("Не должен подтверждать покупку по несуществующей карте")
     void shouldNotConfirmPaymentWithFakeCard() throws SQLException {
-        DbUtils.clearTables();
+        DbClient.clearTables();
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(fakeCard);
         paymentPage.isNotificationStatusErrorVisible();
-        assertEquals("0", DbUtils.countRecords());
+        assertEquals("0", DbClient.countRecords());
     }
 
     @Test
@@ -97,6 +97,6 @@ public class BuyingTripDbTest {
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(fakeCard);
         creditPage.isNotificationStatusErrorVisible();
-        assertEquals("0", DbUtils.countRecords());
+        assertEquals("0", DbClient.countRecords());
     }
 }
