@@ -29,6 +29,8 @@ out/
 
 ### VS Code ###
 .vscode/
+.claude
+CLAUDE.md
 
 ### Package Files ###
 *.jar

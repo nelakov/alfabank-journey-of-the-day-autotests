@@ -1,28 +1,16 @@
 package test;
 
-import com.codeborne.selenide.logevents.SelenideLogger;
-import utils.ApiClient;
 import data.Card;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import utils.ApiClient;
 import utils.DataGenerator;
-import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 public class BuyingTripApiTest {
-
     Card invalidHolderCard = DataGenerator.getInvalidHolderCard();
-
-    @BeforeAll
-    static void setUpAll() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
-
-    @AfterAll
-    static void tearDownAll() {
-        SelenideLogger.removeListener("allure");
-    }
 
     @Test
     @DisplayName("Не должен отправлять запрос на оплату с некорректным именем владельца")
@@ -37,4 +25,5 @@ public class BuyingTripApiTest {
         int statusCode = ApiClient.getRequestStatusCode(invalidHolderCard, "/api/v1/credit");
         assertNotEquals(200, statusCode);
     }
+
 }
