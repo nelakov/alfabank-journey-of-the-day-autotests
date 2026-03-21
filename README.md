@@ -34,6 +34,39 @@ The project was developed as a diploma capstone for [Netology's](https://netolog
 
 ---
 
+## Application UI
+
+The SUT is a single-page tour-booking application. Below are the key screens that the test framework interacts with.
+
+**Landing page** — the starting point with two purchase options:
+
+<p align="center">
+  <img src="docs/ui-landing-page.png" alt="Landing page — Buy or Credit" width="700"/>
+</p>
+
+**Payment & Credit forms** — identical layout, different processing paths:
+
+<p align="center">
+  <img src="docs/ui-payment-form.png" alt="Debit card payment form" width="420"/>
+  <img src="docs/ui-credit-form.png" alt="Credit form" width="420"/>
+</p>
+
+**Transaction results** — the notifications that UI tests assert on:
+
+<p align="center">
+  <img src="docs/ui-credit-approved.png" alt="Approved — success notification" width="420"/>
+  <img src="docs/ui-credit-declined.png" alt="Declined — error notification" width="420"/>
+</p>
+
+<details>
+<summary>Loading state (intermediate)</summary>
+<p align="center">
+  <img src="docs/ui-credit-loading.png" alt="Loading — sending request to bank" width="500"/>
+</p>
+</details>
+
+---
+
 ## Architecture
 
 <p align="center">
@@ -193,7 +226,13 @@ demo-alfabank-test-framework/
 │   ├── Plan.md                    # Automation plan & risk analysis
 │   ├── Report.md                  # Test execution report
 │   ├── Summary.md                 # Final automation summary
-│   └── architecture.png           # C4 architecture diagram
+│   ├── architecture.png           # C4 architecture diagram
+│   ├── ui-landing-page.png        # SUT: start page
+│   ├── ui-payment-form.png        # SUT: debit card form
+│   ├── ui-credit-form.png         # SUT: credit form
+│   ├── ui-credit-approved.png     # SUT: APPROVED notification
+│   ├── ui-credit-loading.png      # SUT: loading state
+│   └── ui-credit-declined.png     # SUT: DECLINED notification
 ├── docker-compose.yml             # Gate simulator + MySQL + PostgreSQL
 ├── build.gradle                   # Dependencies, Allure config, test setup
 └── application.properties         # SUT configuration
