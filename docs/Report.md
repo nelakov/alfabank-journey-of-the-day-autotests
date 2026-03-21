@@ -8,13 +8,13 @@ Testing was carried out for two databases - MySQL and PostgreSQL.
 
 The service has been tested using the following tools:
 
-* Docker Desktop
-* Java 8
-* junit-jupiter: 5.6.1
-* selenide: 5.11.0
-* allure 2.13.6
-* Lombok 5.2.1
-* MySQL and PostgreSQL
+* Docker Compose
+* Java 25
+* junit-jupiter: 5.14.3
+* selenide: 7.15.0
+* rest-assured: 6.0.0
+* allure: 2.33.0
+* MySQL 8.4 and PostgreSQL 17.9
 
 ### _Number of test cases_
 

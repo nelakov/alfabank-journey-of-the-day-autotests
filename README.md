@@ -1,74 +1,78 @@
-# _Diploma project of the profession "Automation QA"_
+# Test Automation Framework — "Journey of the Day"
 
-[Automation plan](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Plan.md)
-
-[Report on the results of testing](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Report.md)
-
-[Report on the results of automation](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Summary.md)
+[Automation Plan](docs/Plan.md) | [Test Report](docs/Report.md) | [Automation Summary](docs/Summary.md)
 
 ---------------------
 
-## _Application Description_
+## Application Description
 
-Web service "Journey of the day".
+Web service "Journey of the Day" — a tour-booking application.
 
 The application offers two ways to buy a tour for a fixed amount:
 
 1. Regular debit card payment
-1. Unique technology: issuing credit according to bank card data
+2. Credit based on bank card data
 
-The application itself does not process card data, but sends them to banking services:
-* payment service (Payment Gate)
-* credit service (Credit Gate)
+The application does not process card data directly, but forwards them to banking services:
+* Payment Gate (port 9999)
+* Credit Gate (port 9999)
 
-The application must store information in its own DBMS about how the payment was made and whether it was made successfully (at the same time, it is not allowed to save card data).
+Transaction results are stored in the database (card data is not persisted).
 
 ---------------------
 
-## _Launch Instructions_
+## Tech Stack
 
-1. Clone a repository  
-    <code>git clone https://github.com/elakovnick24/Elakov_Nick_Project.git </code>
+* Java 25, Gradle 9.4.1
+* JUnit 5.14.3, Selenide 7.15.0, REST-Assured 6.0.0
+* Allure 2.33.0
+* MySQL 8.4 / PostgreSQL 17.9
+* Docker Compose (gate simulator + databases)
 
-2. Launch docker containers: 
+---------------------
 
-   In order to run with MySQL, PostgreSQL and Node.js need to use the command
-   `docker-compose up -d --build`; 
-  _in order for the image not to be rebuilt every time, you need to remove the --build flag_
+## Launch Instructions
 
-3. Launch the application:  
+1. Clone the repository
+   ```bash
+   git clone https://github.com/nelakov/demo-alfabank-test-framework.git
+   ```
 
-   -  Before launching under MySQL, check the connection url in the **application.properties file**
-    `
-    spring.datasource.url=jdbc:mysql://localhost:3306/app
-    `
-    
-   -  to run under PostgreSQL, check the connection url in the **application.properties file**
-    `
-    spring.datasource.url=jdbc:postgresql://localhost:5432/app
-   `
-   
-   - Execute the command 
-  
-     `
-     java -jar ./artifacts/aqa-shop.jar
-     `
+2. Start infrastructure (gate simulator + both databases)
+   ```bash
+   docker-compose up -d --build
+   ```
 
-4. Run tests:  
+3. Start the application
 
-   * для запуска тестов под базой данных MySQL 
-    
-     `
-     gradlew -Ddb.url=jdbc:mysql://localhost:3306/app clean test
-     `
-   * to run tests under the PostgreSQL database 
-    
-     `
-     gradlew -Ddb.url=jdbc:postgresql://localhost:5432/app clean test
-     `
+   With MySQL (default):
+   ```bash
+   java -jar artifacts/aqa-shop.jar &
+   ```
 
-5. Generate reports with the command:  
-   <code>gradlew allureReport</code>  
+   With PostgreSQL:
+   ```bash
+   java -jar artifacts/aqa-shop.jar --spring.datasource.url=jdbc:postgresql://localhost:5432/app &
+   ```
 
-6. Open reports in the browser with the command: 
-   <code>gradlew allureServe</code>
+4. Run tests
+
+   Against MySQL:
+   ```bash
+   ./gradlew test -Ddb.url=jdbc:mysql://localhost:3306/app
+   ```
+
+   Against PostgreSQL:
+   ```bash
+   ./gradlew test -Ddb.url=jdbc:postgresql://localhost:5432/app
+   ```
+
+   Headless (CI):
+   ```bash
+   ./gradlew test -Dselenide.headless=true -Ddb.url=jdbc:mysql://localhost:3306/app
+   ```
+
+5. Generate and open Allure report
+   ```bash
+   ./gradlew allureServe
+   ```
