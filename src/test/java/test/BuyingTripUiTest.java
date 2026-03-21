@@ -63,7 +63,7 @@ public class BuyingTripUiTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(expiredCard);
-        assertTrue(paymentPage.isValidationErrorVisible(),"Должен показывать сообщение об ошибке, если срок карты истек, страница оплаты");
+        assertTrue(paymentPage.isValidationErrorVisible(), "Должен показывать сообщение об ошибке, если срок карты истек, страница оплаты");
     }
 
     @Test
@@ -73,7 +73,7 @@ public class BuyingTripUiTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(expiredCard);
-        assertTrue(creditPage.isValidationErrorVisible(),"Должен показывать сообщение об ошибке, если срок карты истек, страница кредита");
+        assertTrue(creditPage.isValidationErrorVisible(), "Должен показывать сообщение об ошибке, если срок карты истек, страница кредита");
     }
 
     @Test
@@ -83,7 +83,7 @@ public class BuyingTripUiTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(invalidExpDateCard);
-        assertTrue(paymentPage.isValidationErrorVisible(),"Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница оплаты");
+        assertTrue(paymentPage.isValidationErrorVisible(), "Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница оплаты");
     }
 
     @Test
@@ -93,6 +93,7 @@ public class BuyingTripUiTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(invalidExpDateCard);
-        assertTrue(creditPage.isValidationErrorVisible(),"Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница кредита");
+        assertTrue(creditPage.isValidationErrorVisible(), "Должен показывать сообщение об ошибке, если срок действия карты более 5 лет, страница кредита");
     }
+
 }

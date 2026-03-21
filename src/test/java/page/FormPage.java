@@ -47,7 +47,7 @@ public class FormPage {
         notificationStatusOk.shouldBe(visible, notificationTimeout);
     }
 
-    public void isNotificationStatusErrorVisible() {
+    public void shouldShowErrorNotification() {
         notificationStatusError.shouldBe(visible, notificationTimeout);
     }
 }
