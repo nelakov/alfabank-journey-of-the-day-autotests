@@ -4,6 +4,8 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import data.Card;
 import io.qameta.allure.Description;
 import io.qameta.allure.selenide.AllureSelenide;
+import junit.extension.VideoAttachExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
 import utils.DataGenerator;
 
 import org.junit.jupiter.api.*;
@@ -16,7 +18,7 @@ import page.StartPage;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@ExtendWith(VideoAttachExtension.class)
 public class BuyingTripUiTest {
 
     @BeforeEach
@@ -104,5 +106,4 @@ public class BuyingTripUiTest {
         creditPage.fillData(invalidExpDateCard);
         assertTrue(creditPage.isValidationErrorVisible(), "Expected validation error for expiration date exceeds 5 years on credit page");
     }
-
 }
