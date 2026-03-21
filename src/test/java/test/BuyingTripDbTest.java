@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BuyingTripDbTest {
-
     Card validCard = DataGenerator.getValidCard();
     Card declinedCard = DataGenerator.getDeclinedCard();
     Card fakeCard = DataGenerator.getFakeCard();
@@ -65,7 +64,7 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(declinedCard);
-        paymentPage.isNotificationStatusErrorVisible();
+        paymentPage.shouldShowErrorNotification();
         assertEquals("DECLINED", DbClient.findPaymentStatus());
     }
 
@@ -75,18 +74,17 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(declinedCard);
-        creditPage.isNotificationStatusErrorVisible();
+        creditPage.shouldShowErrorNotification();
         assertEquals("DECLINED", DbClient.findCreditStatus());
     }
 
     @Test
     @DisplayName("Не должен подтверждать покупку по несуществующей карте")
     void shouldNotConfirmPaymentWithFakeCard() throws SQLException {
-        DbClient.clearTables();
         StartPage startPage = new StartPage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.fillData(fakeCard);
-        paymentPage.isNotificationStatusErrorVisible();
+        paymentPage.shouldShowErrorNotification();
         assertEquals("0", DbClient.countRecords());
     }
 
@@ -96,7 +94,8 @@ public class BuyingTripDbTest {
         StartPage startPage = new StartPage();
         CreditPage creditPage = startPage.goToCreditPage();
         creditPage.fillData(fakeCard);
-        creditPage.isNotificationStatusErrorVisible();
+        creditPage.shouldShowErrorNotification();
         assertEquals("0", DbClient.countRecords());
     }
+
 }
