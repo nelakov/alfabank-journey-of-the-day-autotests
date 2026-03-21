@@ -1,52 +1,77 @@
-# _The report on the results of testing_
+# Test Report
 
-### _Brief description_
+### Brief description
 
-The web service "Journey of the Day" was tested, which is a comprehensive service that interacts with the DBMS and the API of the Bank.
+The web service "Journey of the Day" was tested — a tour-booking application that integrates with a DBMS and the Bank's payment API.
 
-Testing was carried out for two databases - MySQL and PostgreSQL.
+Testing was carried out against two databases: MySQL and PostgreSQL.
 
-The service has been tested using the following tools:
+### Tools used
 
-* Docker Compose
-* Java 25
-* junit-jupiter: 5.14.3
-* selenide: 7.15.0
-* rest-assured: 6.0.0
-* allure: 2.33.0
-* MySQL 8.4 and PostgreSQL 17.9
+| Tool | Version |
+|:-----|:--------|
+| Docker Compose | v2+ |
+| Java | 25 |
+| JUnit Jupiter | 5.14.3 |
+| Selenide | 7.15.0 |
+| REST-Assured | 6.0.0 |
+| Allure | 2.33.0 |
+| MySQL | 8.4 |
+| PostgreSQL | 17.9 |
 
-### _Number of test cases_
+### Application under test
 
-The total number of test cases is 26 (4 positive, 22 negative)
+<p align="center">
+  <img src="ui-landing-page.png" alt="Landing page" width="600"/>
+</p>
 
-* successful - 16 (61.53%)
-* unsuccessful - 10 (38.47%)
+Two purchase flows were tested — **debit card payment** and **credit by card data**:
 
-![proof](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/proof/allure.png)
+<p align="center">
+  <img src="ui-payment-form.png" alt="Payment form" width="400"/>
+  <img src="ui-credit-form.png" alt="Credit form" width="400"/>
+</p>
 
+### Test results
 
-### _The scenarios that are prescribed in the test plan have been tested:_
-[Test Automation Plan](https://github.com/elakovnick24/Elakov_Nick_Project/blob/master/docs/Plan.md )
+The total number of test cases: **26** (4 positive, 22 negative)
 
-#### _Found bugs_
-* [Spelling error in the name of the tour](https://github.com/elakovnick24/Elakov_Nick_Project/issues/1 )
-* [When paying with an invalid card, error and success messages appear simultaneously](https://github.com/elakovnick24/Elakov_Nick_Project/issues/2 )
-* [credit_id is not created in the DB in the order_entity table](https://github.com/elakovnick24/Elakov_Nick_Project/issues/3 )
-* [Incorrect characters can be entered in the "Owner" field](https://github.com/elakovnick24/Elakov_Nick_Project/issues/4 )
-* [You can enter Cyrillic characters in the "Owner" field](https://github.com/elakovnick24/Elakov_Nick_Project/issues/5 )
-* [If the cvs/cvv field is not filled in, a warning appears under the Owner field](https://github.com/elakovnick24/Elakov_Nick_Project/issues/6 )
-* [Incorrect status entry in the database and incorrect pop-up with transaction status](https://github.com/elakovnick24/Elakov_Nick_Project/issues/7 )
-* [Invalid record of the transaction status in the database](https://github.com/elakovnick24/Elakov_Nick_Project/issues/8 )
-* [Missing pop-up "Incorrect data entered"](https://github.com/elakovnick24/Elakov_Nick_Project/issues/9 )
-* [There is no error message when entering incorrect data](https://github.com/elakovnick24/Elakov_Nick_Project/issues/10 )
+| Result | Count | Percentage |
+|:-------|------:|-----------:|
+| Passed | 16 | 61.53% |
+| Failed | 10 | 38.47% |
 
+**Expected notifications:**
 
-### _General recommendations:_
+| Scenario | Notification | Screenshot |
+|:---------|:-------------|:-----------|
+| APPROVED card | "Успешно — Операция одобрена Банком" | ![approved](ui-credit-approved.png) |
+| DECLINED card | "Ошибка — Банк отказал в проведении операции" | ![declined](ui-credit-declined.png) |
 
-* Create documentation for this application
-* Add the functionality of blocking the "Continue" button until all fields are filled with the correct values
-* Add a change in the color of the "Buy" and "Buy on Credit" buttons when switching between two tabs for user convenience 
-* Replace the "Incorrect Format" warnings with more informative ones
+### Allure report
 
+![Allure Report](proof/allure.png)
 
+### Test scenarios reference
+
+All scenarios from the [Test Automation Plan](Plan.md) have been executed.
+
+### Found bugs
+
+1. [Spelling error in the name of the tour](https://github.com/nelakov/demo-alfabank-test-framework/issues/1)
+2. [When paying with an invalid card, error and success messages appear simultaneously](https://github.com/nelakov/demo-alfabank-test-framework/issues/2)
+3. [credit_id is not created in the DB in the order_entity table](https://github.com/nelakov/demo-alfabank-test-framework/issues/3)
+4. [Incorrect characters can be entered in the "Owner" field](https://github.com/nelakov/demo-alfabank-test-framework/issues/4)
+5. [You can enter Cyrillic characters in the "Owner" field](https://github.com/nelakov/demo-alfabank-test-framework/issues/5)
+6. [If the CVC/CVV field is not filled in, a warning appears under the Owner field](https://github.com/nelakov/demo-alfabank-test-framework/issues/6)
+7. [Incorrect status entry in the database and incorrect pop-up with transaction status](https://github.com/nelakov/demo-alfabank-test-framework/issues/7)
+8. [Invalid record of the transaction status in the database](https://github.com/nelakov/demo-alfabank-test-framework/issues/8)
+9. [Missing pop-up "Incorrect data entered"](https://github.com/nelakov/demo-alfabank-test-framework/issues/9)
+10. [There is no error message when entering incorrect data](https://github.com/nelakov/demo-alfabank-test-framework/issues/10)
+
+### Recommendations
+
+- Create documentation / technical specification for the application
+- Block the "Продолжить" button until all fields contain valid data
+- Add visual feedback when switching between "Купить" and "Купить в кредит" tabs
+- Replace generic "Incorrect format" warnings with field-specific error messages
