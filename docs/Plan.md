@@ -103,12 +103,13 @@ Expected result: an error message "Invalid format" appeared under the CVC/CVV fi
 
 ## _The list of tools used with the justification of the choice_
 
-* Java 8 - the language for writing auto-tests, the most reliable version
-* Gradle - build automation and dependency management system
-* JUnit is a platform for writing auto—tests and running them 
-* Selenide is a framework for automated testing of web applications based on Selenium WebDriver, more convenient and easy to use than Selenium
-* Docker Compose is a tool that allows you to run multi-container applications, so as not to install Node applications necessary for operation on your computer.js and DBMS
-* Allure is a framework designed to create reports that are more visual than Gradle
+* Java 25 — language for writing auto-tests, with modern features (records, var, pattern matching)
+* Gradle 9.4.1 — build automation and dependency management
+* JUnit 5.14.3 — test framework with parameterized tests and display names
+* Selenide 7.15.0 — web UI testing framework based on Selenium WebDriver
+* REST-Assured 6.0.0 — API testing library
+* Docker Compose — multi-container orchestration for gate simulator and databases
+* Allure 2.33.0 — test reporting framework
 
 ## _The list and description of possible risks in automation_
 * Due to the lack of technical specifications and any documentation, it is difficult to understand how the application should work and what system behavior should be considered an error
