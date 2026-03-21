@@ -13,14 +13,14 @@ public class BuyingTripApiTest {
     Card invalidHolderCard = DataGenerator.getInvalidHolderCard();
 
     @Test
-    @DisplayName("Не должен отправлять запрос на оплату с некорректным именем владельца")
+    @DisplayName("Should reject payment request with invalid holder name")
     void shouldNotSendPaymentRequestWithIncorrectName() {
         int statusCode = ApiClient.getRequestStatusCode(invalidHolderCard, "/api/v1/pay");
         assertNotEquals(200, statusCode);
     }
 
     @Test
-    @DisplayName("Не должен отправлять запрос на кредит с некорректным именем владельца")
+    @DisplayName("Should reject credit request with invalid holder name")
     void shouldNotSendCreditRequestWithIncorrectName() {
         int statusCode = ApiClient.getRequestStatusCode(invalidHolderCard, "/api/v1/credit");
         assertNotEquals(200, statusCode);
