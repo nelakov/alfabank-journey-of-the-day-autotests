@@ -2,21 +2,23 @@ package test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.Card;
-import utils.DataGenerator;
-import utils.DbClient;
 import io.qameta.allure.Description;
 import io.qameta.allure.selenide.AllureSelenide;
+import junit.extension.VideoAttachExtension;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import page.CreditPage;
 import page.PaymentPage;
 import page.StartPage;
+import utils.DataGenerator;
+import utils.DbClient;
 
 import java.sql.SQLException;
 
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@ExtendWith(VideoAttachExtension.class)
 public class BuyingTripDbTest {
     Card validCard = DataGenerator.getValidCard();
     Card declinedCard = DataGenerator.getDeclinedCard();
@@ -108,5 +110,4 @@ public class BuyingTripDbTest {
         creditPage.shouldShowErrorNotification();
         assertEquals("0", DbClient.countRecords());
     }
-
 }
