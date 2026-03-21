@@ -28,5 +28,4 @@ public class BuyingTripApiTest {
         int statusCode = ApiClient.getRequestStatusCode(invalidHolderCard, "/api/v1/credit");
         assertNotEquals(200, statusCode);
     }
-
 }
