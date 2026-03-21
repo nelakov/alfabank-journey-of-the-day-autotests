@@ -89,10 +89,10 @@ The framework tests three layers of the application stack:
 
 | Suite | Class | Tests | Layer | What it validates |
 |:------|:------|:-----:|:------|:------------------|
-| UI | `BuyingTripUiTest` | 14 | Browser | Form validation, expiry logic, parameterized CSV-driven field checks |
+| UI | `BuyingTripUiTest` | 18 | Browser | Form validation, expiry logic, parameterized CSV-driven field checks |
 | API | `BuyingTripApiTest` | 2 | REST | Rejects invalid card holder data at API level |
 | DB | `BuyingTripDbTest` | 6 | Full stack | UI → SUT → DB state: APPROVED, DECLINED, unknown card scenarios |
-| **Total** | | **22** | | |
+| **Total** | | **26** | | |
 
 All UI and DB tests run against both **Payment** and **Credit** flows.
 
