@@ -35,5 +35,4 @@ public class DataGenerator {
     public static Card getInvalidExpDateCard(int months) {
         return createCard("4444 4444 4444 4441", months, "Card Holder", "123");
     }
-
 }
