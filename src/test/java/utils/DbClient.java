@@ -45,5 +45,4 @@ public class DbClient {
             return result == null ? null : result.toString();
         }
     }
-
 }
