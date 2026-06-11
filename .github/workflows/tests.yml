@@ -64,12 +64,3 @@ jobs:
           name: test-results
           path: build/reports/tests/test
           retention-days: 30
-
-      - name: Upload failure videos
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: test-failure-videos
-          path: videos/*.mp4
-          retention-days: 30
-          if-no-files-found: ignore

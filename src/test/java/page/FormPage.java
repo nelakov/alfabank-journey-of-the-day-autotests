@@ -21,7 +21,6 @@ public class FormPage {
     private final SelenideElement continueButton = $$("button").find(exactText("Продолжить"));
     private final SelenideElement notificationStatusOk = $(".notification_status_ok");
     private final SelenideElement notificationStatusError = $(".notification_status_error");
-    private final SelenideElement validationError = $(".input__sub");
 
     protected FormPage(String headingText, Duration notificationTimeout) {
         SelenideElement heading = $$("h3").find(text(headingText));
@@ -39,8 +38,10 @@ public class FormPage {
         continueButton.click();
     }
 
-    public boolean isValidationErrorVisible() {
-        return validationError.isDisplayed();
+    public void shouldShowValidationError(String fieldLabel, String expectedText) {
+        $(byText(fieldLabel)).parent().$(".input__sub")
+                .shouldBe(visible)
+                .shouldHave(text(expectedText));
     }
 
     public void shouldShowSuccessNotification() {
