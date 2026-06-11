@@ -52,4 +52,5 @@ CLAUDE.md
 .allure/
 data_mysql/
 data_postgres/
-gate-simulator/node_modulesvideos/
+gate-simulator/node_modules/
+videos/
