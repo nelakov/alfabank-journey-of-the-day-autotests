@@ -44,10 +44,10 @@ Default system property values: `db.user=app`, `db.password=pass`, `sut.url=http
 - **`data/Card.java`** — Java record (number, month, year, holder, cvc). Immutable. All test data flows through this type.
 - **`page/`** — Page Object Model. `FormPage` base class holds all form fields, `fillData()`, and notification assertions. `PaymentPage` and `CreditPage` extend it with heading text and timeout only. `StartPage` navigates to either.
 - **`utils/DataGenerator`** — Factory methods for card fixtures using dynamic `YearMonth` dates. Card numbers ending `4441` = APPROVED, `4442` = DECLINED, `4449` = unknown to gate.
-- **`utils/ApiUtils`** — REST-Assured wrapper; POSTs card JSON to `/api/v1/pay` or `/api/v1/credit`.
-- **`utils/DbUtils`** — Direct JDBC queries via Commons-DbUtils. Reads `payment_entity.status`, `credit_request_entity.status`, `order_entity` count. `clearTables()` wipes all three tables.
-- **`test/BuyingTripUiTest`** — Parametrized form-validation tests (CSV-driven from `incorrectValues.cvs`) + expired/future-date tests.
-- **`test/BuyingTripApiTest`** — API-level tests posting invalid data, asserting non-200 status.
+- **`utils/ApiClient`** — REST-Assured wrapper; POSTs card JSON to `/api/v1/pay` or `/api/v1/credit`.
+- **`utils/DbClient`** — Direct JDBC queries via Commons-DbUtils. Reads `payment_entity.status`, `credit_request_entity.status`, `order_entity` count. `clearTables()` wipes all three tables.
+- **`test/BuyingTripUiTest`** — Parametrized form-validation tests (CSV-driven from `incorrectValues.cvs`) + expired/future-date tests. CSV columns: card fields + `field` (label of the input expected to fail) + `warning` (expected error text). Month/year cells use the `VALID` sentinel, replaced at runtime with a non-expiring value.
+- **`test/BuyingTripApiTest`** — API-level tests posting invalid data, asserting 400. Currently `@Disabled`: the SUT accepts invalid holder names with 200 (documented defect).
 - **`test/BuyingTripDbTest`** — Full integration: UI interaction → DB state verification. Clears tables in `@BeforeEach`.
 
 ## Database Schema (3 tables)
@@ -59,7 +59,7 @@ Default system property values: `db.user=app`, `db.password=pass`, `sut.url=http
 ## Key Conventions
 
 - Java 25, Gradle 9.4.1, Java records for data classes.
-- Dual-database support (MySQL 8.3 / PostgreSQL 16.1) — switched via `db.url` system property and SUT `--spring.datasource.url` flag.
+- Dual-database support (MySQL 8.4 / PostgreSQL 17) — switched via `db.url` system property and SUT `--spring.datasource.url` flag.
 - Page objects return page instances for fluent navigation (`goToPaymentPage()` → `PaymentPage`).
 - Notification assertions use explicit waits (12–15 seconds via `FormPage.notificationTimeout`) — do not reduce these, the SUT is slow to respond through the gate simulator.
 - CSV test data file is `incorrectValues.cvs` (not `.csv`) — this is intentional, do not rename.
