@@ -1,8 +1,8 @@
 <p align="center">
-  <h1 align="center">🧪 Journey of the Day — Test Automation Framework</h1>
+  <h1 align="center">🧪 Journey of the Day — Automated Test Suite</h1>
   <p align="center">
     Multi-layer test automation for a tour-booking web application<br/>
-    <strong>UI · API · Database</strong> — all in one framework
+    <strong>UI · API · Database</strong> — all in one suite
   </p>
 </p>
 
@@ -20,7 +20,7 @@
 
 ## About
 
-**Journey of the Day** is a test automation framework for an [Alfa-Bank](https://alfabank.ru/) web service — a Spring Boot tour-booking application with integrated payment processing. The SUT offers two purchase flows — direct debit card payment and bank credit — both routed through a simulated payment gateway. This framework validates the entire vertical: from the browser UI through REST endpoints down to the database state.
+**Journey of the Day** is an automated test suite for an [Alfa-Bank](https://alfabank.ru/) web service — a Spring Boot tour-booking application with integrated payment processing. The SUT offers two purchase flows — direct debit card payment and bank credit — both routed through a simulated payment gateway. This suite validates the entire vertical: from the browser UI through REST endpoints down to the database state.
 
 The project was developed as a diploma capstone for [Netology's](https://netology.ru/) QA Automation program ([certificate](https://netology.ru/sharing/6f7576bbc619a45373ef783483cab60d?utm_source=social&utm_campaign=certificate_lms)). It demonstrates a production-grade approach to test architecture with clean separation of concerns, dual-database support, and containerized infrastructure.
 
@@ -36,7 +36,7 @@ The project was developed as a diploma capstone for [Netology's](https://netolog
 
 ## Application UI
 
-The SUT is a single-page tour-booking application. Below are the key screens that the test framework interacts with.
+The SUT is a single-page tour-booking application. Below are the key screens that the test suite interacts with.
 
 **Landing page** — the starting point with two purchase options:
 
@@ -73,7 +73,7 @@ The SUT is a single-page tour-booking application. Below are the key screens tha
   <img src="docs/architecture.png" alt="Architecture Diagram — C4 Container Level" width="800"/>
 </p>
 
-The framework tests three layers of the application stack:
+The suite tests three layers of the application stack:
 
 **Key design decisions:**
 
@@ -290,7 +290,7 @@ It listens on port **9999** and handles both `/payment` and `/credit` endpoints.
 
 ## Selenium Grid
 
-The framework supports remote browser execution via [Selenium Grid 4](https://www.selenium.dev/documentation/grid/) Standalone. When enabled, tests run inside a Docker container with Chromium — no local browser installation required.
+The suite supports remote browser execution via [Selenium Grid 4](https://www.selenium.dev/documentation/grid/) Standalone. When enabled, tests run inside a Docker container with Chromium — no local browser installation required.
 
 | Service | Port | Purpose |
 |:--------|:-----|:--------|
@@ -322,4 +322,4 @@ The report includes test execution details, step-by-step Selenide logs, and scre
 
 ## License
 
-This project is a demonstration/educational framework. Feel free to use it as a reference for your own test automation projects.
+This project is a demonstration/educational test suite. Feel free to use it as a reference for your own test automation projects.
