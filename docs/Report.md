@@ -58,16 +58,16 @@ All scenarios from the [Test Automation Plan](Plan.md) have been executed.
 
 ### Found bugs
 
-1. [Spelling error in the name of the tour](https://github.com/nelakov/demo-alfabank-test-framework/issues/1)
-2. [When paying with an invalid card, error and success messages appear simultaneously](https://github.com/nelakov/demo-alfabank-test-framework/issues/2)
-3. [credit_id is not created in the DB in the order_entity table](https://github.com/nelakov/demo-alfabank-test-framework/issues/3)
-4. [Incorrect characters can be entered in the "Owner" field](https://github.com/nelakov/demo-alfabank-test-framework/issues/4)
-5. [You can enter Cyrillic characters in the "Owner" field](https://github.com/nelakov/demo-alfabank-test-framework/issues/5)
-6. [If the CVC/CVV field is not filled in, a warning appears under the Owner field](https://github.com/nelakov/demo-alfabank-test-framework/issues/6)
-7. [Incorrect status entry in the database and incorrect pop-up with transaction status](https://github.com/nelakov/demo-alfabank-test-framework/issues/7)
-8. [Invalid record of the transaction status in the database](https://github.com/nelakov/demo-alfabank-test-framework/issues/8)
-9. [Missing pop-up "Incorrect data entered"](https://github.com/nelakov/demo-alfabank-test-framework/issues/9)
-10. [There is no error message when entering incorrect data](https://github.com/nelakov/demo-alfabank-test-framework/issues/10)
+1. [Spelling error in the name of the tour](https://github.com/nelakov/alfabank-journey-of-the-day-autotests/issues/1)
+2. [When paying with an invalid card, error and success messages appear simultaneously](https://github.com/nelakov/alfabank-journey-of-the-day-autotests/issues/2)
+3. [credit_id is not created in the DB in the order_entity table](https://github.com/nelakov/alfabank-journey-of-the-day-autotests/issues/3)
+4. [Incorrect characters can be entered in the "Owner" field](https://github.com/nelakov/alfabank-journey-of-the-day-autotests/issues/4)
+5. [You can enter Cyrillic characters in the "Owner" field](https://github.com/nelakov/alfabank-journey-of-the-day-autotests/issues/5)
+6. [If the CVC/CVV field is not filled in, a warning appears under the Owner field](https://github.com/nelakov/alfabank-journey-of-the-day-autotests/issues/6)
+7. [Incorrect status entry in the database and incorrect pop-up with transaction status](https://github.com/nelakov/alfabank-journey-of-the-day-autotests/issues/7)
+8. [Invalid record of the transaction status in the database](https://github.com/nelakov/alfabank-journey-of-the-day-autotests/issues/8)
+9. [Missing pop-up "Incorrect data entered"](https://github.com/nelakov/alfabank-journey-of-the-day-autotests/issues/9)
+10. [There is no error message when entering incorrect data](https://github.com/nelakov/alfabank-journey-of-the-day-autotests/issues/10)
 
 ### Recommendations
 
