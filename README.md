@@ -131,8 +131,8 @@ All UI and DB tests run against both **Payment** and **Credit** flows.
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/nelakov/demo-alfabank-test-framework.git
-cd demo-alfabank-test-framework
+git clone https://github.com/nelakov/alfabank-journey-of-the-day-autotests.git
+cd alfabank-journey-of-the-day-autotests
 ```
 
 **2. Start infrastructure**
@@ -202,7 +202,7 @@ The application will be available at `http://localhost:8080`.
 ## Project Structure
 
 ```
-demo-alfabank-test-framework/
+alfabank-journey-of-the-day-autotests/
 ├── artifacts/
 │   └── aqa-shop.jar              # SUT — Spring Boot application
 ├── gate-simulator/                # Payment gateway mock
