@@ -1,8 +1,8 @@
 <p align="center">
-  <h1 align="center">🧪 Journey of the Day — Automated Test Suite</h1>
+  <h1 align="center">Journey of the Day: automated tests</h1>
   <p align="center">
-    Multi-layer test automation for a tour-booking web application<br/>
-    <strong>UI · API · Database</strong> — all in one suite
+    Multi-layer test automation for a tour-booking web application.<br/>
+    <strong>UI, API, and database.</strong>
   </p>
 </p>
 
@@ -20,9 +20,9 @@
 
 ## About
 
-**Journey of the Day** is an automated test suite for an [Alfa-Bank](https://alfabank.ru/) web service — a Spring Boot tour-booking application with integrated payment processing. The SUT offers two purchase flows — direct debit card payment and bank credit — both routed through a simulated payment gateway. This suite validates the entire vertical: from the browser UI through REST endpoints down to the database state.
+**Journey of the Day** is an automated test suite for an [Alfa-Bank](https://alfabank.ru/) web service, a Spring Boot tour-booking application with integrated payment processing. The SUT offers two purchase flows, direct debit card payment and bank credit, both routed through a simulated payment gateway. This suite validates the entire vertical: from the browser UI through REST endpoints down to the database state.
 
-The project was developed as a diploma capstone for [Netology's](https://netology.ru/) QA Automation program ([certificate](https://netology.ru/sharing/6f7576bbc619a45373ef783483cab60d?utm_source=social&utm_campaign=certificate_lms)). It demonstrates a production-grade approach to test architecture with clean separation of concerns, dual-database support, and containerized infrastructure.
+I built it as the diploma project for [Netology's](https://netology.ru/) QA Automation program ([certificate](https://netology.ru/sharing/6f7576bbc619a45373ef783483cab60d?utm_source=social&utm_campaign=certificate_lms)). It runs against two databases, keeps the test layers separate, and ships its infrastructure as Docker containers.
 
 ### Documentation
 
@@ -38,30 +38,30 @@ The project was developed as a diploma capstone for [Netology's](https://netolog
 
 The SUT is a single-page tour-booking application. Below are the key screens that the test suite interacts with.
 
-**Landing page** — the starting point with two purchase options:
+**Landing page**, the starting point with two purchase options:
 
 <p align="center">
-  <img src="docs/ui-landing-page.png" alt="Landing page — Buy or Credit" width="700"/>
+  <img src="docs/ui-landing-page.png" alt="Landing page, Buy or Credit" width="700"/>
 </p>
 
-**Payment & Credit forms** — identical layout, different processing paths:
+**Payment & Credit forms**, identical layout, different processing paths:
 
 <p align="center">
   <img src="docs/ui-payment-form.png" alt="Debit card payment form" width="420"/>
   <img src="docs/ui-credit-form.png" alt="Credit form" width="420"/>
 </p>
 
-**Transaction results** — the notifications that UI tests assert on:
+**Transaction results**, the notifications that UI tests assert on:
 
 <p align="center">
-  <img src="docs/ui-credit-approved.png" alt="Approved — success notification" width="420"/>
-  <img src="docs/ui-credit-declined.png" alt="Declined — error notification" width="420"/>
+  <img src="docs/ui-credit-approved.png" alt="Approved, success notification" width="420"/>
+  <img src="docs/ui-credit-declined.png" alt="Declined, error notification" width="420"/>
 </p>
 
 <details>
 <summary>Loading state (intermediate)</summary>
 <p align="center">
-  <img src="docs/ui-credit-loading.png" alt="Loading — sending request to bank" width="500"/>
+  <img src="docs/ui-credit-loading.png" alt="Loading, sending request to bank" width="500"/>
 </p>
 </details>
 
@@ -70,18 +70,18 @@ The SUT is a single-page tour-booking application. Below are the key screens tha
 ## Architecture
 
 <p align="center">
-  <img src="docs/architecture.png" alt="Architecture Diagram — C4 Container Level" width="800"/>
+  <img src="docs/architecture.png" alt="Architecture Diagram, C4 Container Level" width="800"/>
 </p>
 
 The suite tests three layers of the application stack:
 
 **Key design decisions:**
 
-- **Page Object Model** — `FormPage` base class with `PaymentPage` / `CreditPage` inheriting heading text and timeout configuration. Fluent navigation via `StartPage`.
-- **Immutable test data** — Java `record Card(number, month, year, holder, cvc)` as the single data carrier across all layers.
-- **Dynamic dates** — `DataGenerator` computes expiry dates relative to `YearMonth.now()`, so tests never rot due to hardcoded dates.
-- **Dual-database support** — same test suite runs against MySQL and PostgreSQL, switched by a single `-Ddb.url` parameter.
-- **Gate Simulator** — lightweight Express.js service that returns APPROVED/DECLINED based on card number lookup, simulating the bank payment gateway.
+- **Page Object Model**, `FormPage` base class with `PaymentPage` / `CreditPage` inheriting heading text and timeout configuration. Fluent navigation via `StartPage`.
+- **Immutable test data**, Java `record Card(number, month, year, holder, cvc)` as the single data carrier across all layers.
+- **Dynamic dates**, `DataGenerator` computes expiry dates relative to `YearMonth.now()`, so tests never rot due to hardcoded dates.
+- **Dual-database support**, same test suite runs against MySQL and PostgreSQL, switched by a single `-Ddb.url` parameter.
+- **Gate Simulator**, lightweight Express.js service that returns APPROVED/DECLINED based on card number lookup, simulating the bank payment gateway.
 
 ---
 
@@ -120,9 +120,9 @@ All UI and DB tests run against both **Payment** and **Credit** flows.
 
 ## Prerequisites
 
-- **Java 25+** — [Download](https://jdk.java.net/25/)
-- **Docker & Docker Compose** — [Install](https://docs.docker.com/get-docker/)
-- **Browser** — Chrome or Firefox (Selenide auto-manages WebDriver)
+- **Java 25+**, [Download](https://jdk.java.net/25/)
+- **Docker & Docker Compose**, [Install](https://docs.docker.com/get-docker/)
+- **Browser**, Chrome or Firefox (Selenide auto-manages WebDriver)
 
 ---
 
@@ -204,7 +204,7 @@ The application will be available at `http://localhost:8080`.
 ```
 alfabank-journey-of-the-day-autotests/
 ├── artifacts/
-│   └── aqa-shop.jar              # SUT — Spring Boot application
+│   └── aqa-shop.jar              # SUT, Spring Boot application
 ├── gate-simulator/                # Payment gateway mock
 │   ├── app.js                     # Express.js server (APPROVED/DECLINED logic)
 │   ├── data.json                  # Card number → status mapping
@@ -212,12 +212,12 @@ alfabank-journey-of-the-day-autotests/
 ├── src/test/
 │   ├── java/
 │   │   ├── data/
-│   │   │   └── Card.java          # Immutable record — test data carrier
+│   │   │   └── Card.java          # Immutable record, test data carrier
 │   │   ├── page/                  # Page Object Model
-│   │   │   ├── StartPage.java     # Landing page — navigation hub
+│   │   │   ├── StartPage.java     # Landing page, navigation hub
 │   │   │   ├── FormPage.java      # Base form: fields, fill, assertions
-│   │   │   ├── PaymentPage.java   # Extends FormPage — debit payment
-│   │   │   └── CreditPage.java    # Extends FormPage — credit payment
+│   │   │   ├── PaymentPage.java   # Extends FormPage, debit payment
+│   │   │   └── CreditPage.java    # Extends FormPage, credit payment
 │   │   ├── utils/
 │   │   │   ├── DataGenerator.java # Card fixtures with dynamic dates
 │   │   │   ├── ApiClient.java     # REST-Assured wrapper
@@ -252,7 +252,7 @@ All parameters are passed as JVM system properties:
 
 | Property | Default | Description |
 |:---------|:--------|:------------|
-| `db.url` | — | JDBC URL (MySQL or PostgreSQL) |
+| `db.url` | (required) | JDBC URL (MySQL or PostgreSQL) |
 | `db.user` | `app` | Database username |
 | `db.password` | `pass` | Database password |
 | `sut.url` | `http://localhost:8080/` | SUT base URL |
@@ -270,7 +270,7 @@ The SUT uses three tables (auto-created by Spring Boot):
 | `payment_entity` | Debit payment result | `status` (APPROVED / DECLINED) |
 | `credit_request_entity` | Credit payment result | `status` (APPROVED / DECLINED) |
 
-Card data is **never persisted** — only transaction statuses are stored.
+Card data is **never persisted**, only transaction statuses are stored.
 
 ---
 
@@ -290,13 +290,13 @@ It listens on port **9999** and handles both `/payment` and `/credit` endpoints.
 
 ## Selenium Grid
 
-The suite supports remote browser execution via [Selenium Grid 4](https://www.selenium.dev/documentation/grid/) Standalone. When enabled, tests run inside a Docker container with Chromium — no local browser installation required.
+The suite supports remote browser execution via [Selenium Grid 4](https://www.selenium.dev/documentation/grid/) Standalone. When enabled, tests run inside a Docker container with Chromium, no local browser installation required.
 
 | Service | Port | Purpose |
 |:--------|:-----|:--------|
 | Selenium Grid | 4444 | WebDriver endpoint |
-| noVNC | 7900 | Live browser view — open `http://localhost:7900` |
-| Video Recorder | — | Records each session, attaches to Allure on failure |
+| noVNC | 7900 | Live browser view, open `http://localhost:7900` |
+| Video Recorder | n/a | Records each session, attaches to Allure on failure |
 
 **Video on failure**: `VideoAttachExtension` (JUnit `TestWatcher`) automatically attaches the recorded video to the Allure report when a test fails. Successful test recordings are deleted to save disk space.
 
@@ -322,4 +322,4 @@ The report includes test execution details, step-by-step Selenide logs, and scre
 
 ## License
 
-This project is a demonstration/educational test suite. Feel free to use it as a reference for your own test automation projects.
+Educational diploma project. Use it however you like.
